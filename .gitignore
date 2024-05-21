@@ -1,0 +1,7 @@
+.txt
+reports/
+__pycache__/
+api.py
+server.py
+
+
