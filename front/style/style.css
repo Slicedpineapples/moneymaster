@@ -41,7 +41,6 @@ body {
 
 .logout-btn {
     font-size: 14px;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     cursor: pointer;
     background-color: red;
     color: #fff;
@@ -54,9 +53,9 @@ body {
 .logout-btn:hover {
     background-color: darkred;
 }
+
 .toggle-button {
     font-size: 14px;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     cursor: pointer;
     background-color: #e0e0e0;
     color: black;
@@ -65,6 +64,7 @@ body {
     transition: background-color 0.2s;
     border: none;
 }
+
 .toggle-button:hover {
     color: white;
     background-color: gray;
@@ -104,7 +104,6 @@ body {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s;
 }
-
 
 .card .label {
     font-size: 16px;
@@ -170,10 +169,6 @@ body {
         font-size: 16px;
     }
 }
-/* LOGIN, WELCOME, SIGNUP */
-/* style.css */
-
-
 
 /* ADDINCOME && ADDEXPENSE  */
 #Add-Income, #Add-Expense, #Add-Asset, #Add-Liability {
@@ -218,7 +213,6 @@ body {
 
 #Add-Income button, #Add-Expense button, #Add-Asset button, #Add-Liability button {
     font-size: 14px;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     cursor: pointer;
     background-color: #007BFF;
     color: #fff;
@@ -245,29 +239,40 @@ body {
 }
 
 #Report h2 {
-    text-align: center;
+    text-align: left;
     margin-bottom: 20px;
 }
 
 #reportForm {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     justify-content: center;
+    align-items: flex-start;
+}
+
+.form-group {
+    display: flex;
     align-items: center;
+    margin-bottom: 10px;
+    width: 100%;
 }
 
 #reportForm label {
     width: 120px;
-    margin: 5px;
+    color: #333;
+    margin-right: 10px;
+    text-align: right;
 }
 
 #reportForm select,
-#reportForm input[type="date"] {
-    flex: 1;
-    margin: 5px;
+#reportForm input[type="date"],
+#reportForm input[type="text"] {
+    flex-grow: 1;
     padding: 8px;
     border-radius: 5px;
     border: 1px solid #ccc;
+    background-color: #fff;
+    color: #333;
 }
 
 #reportForm button {
@@ -275,17 +280,16 @@ body {
     padding: 8px 20px;
     border: none;
     border-radius: 5px;
-    background-color: #007bff;
+    background-color: #1e90ff;
     color: #fff;
     cursor: pointer;
+    text-align: center;
 }
 
 #reportMessage {
     margin-top: 20px;
     text-align: center;
 }
-
-
 
 /* REPORTS */
 /* Table Container */

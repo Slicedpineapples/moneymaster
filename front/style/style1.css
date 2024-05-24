@@ -238,6 +238,7 @@ body {
     font-size: 14px;
     color: #a0a0a0;
     margin-top: 10px;
+    display: block;
 }
 
 #Report {
@@ -246,27 +247,35 @@ body {
 }
 
 #Report h2 {
-    text-align: center;
+    text-align: left;
     margin-bottom: 20px;
 }
 
 #reportForm {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     justify-content: center;
+    align-items: flex-start;
+}
+
+.form-group {
+    display: flex;
     align-items: center;
+    margin-bottom: 10px;
+    width: 100%;
 }
 
 #reportForm label {
     width: 120px;
-    margin: 5px;
     color: #e0e0e0;
+    margin-right: 10px;
+    text-align: right;
 }
 
 #reportForm select,
-#reportForm input[type="date"] {
-    flex: 1;
-    margin: 5px;
+#reportForm input[type="date"],
+#reportForm input[type="text"] {
+    flex-grow: 1;
     padding: 8px;
     border-radius: 5px;
     border: 1px solid #555;
@@ -288,6 +297,7 @@ body {
     margin-top: 20px;
     text-align: center;
 }
+
 
 /* REPORTS */
 /* Table Container */
@@ -336,3 +346,5 @@ body {
 #reportTable tbody tr:hover {
     background-color: #444;
 }
+
+/*Reports Page*/
