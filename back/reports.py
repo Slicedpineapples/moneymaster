@@ -40,15 +40,12 @@ def incomeReport(userId, start, end):
                 "incomeName": incomeName,
                 "date": date
             })
+        total_income = sum([data['amount'] for data in report_data])
+        total_income = ({"Total" : total_income})
+        report_file.write(f"\nTotal Income: {total_income}")
+        report_file.write(f'\nReport generated for user {userId} on {datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")}')
 
-    return report_path, report_data
-
-    #report_file.write(f'\nTotal income: {sum([row[1] for row in result2])}\n')
-    report_file.write(f'Report generated for user {userId} on {datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")}')
-    report_file.close()
-    cursor.close()
-    print("Income report generated successfully!\nIt is accessible in the income reports directory.")
-    #send report to email address
+    return report_path, report_data, total_income
 
 def expensesReport(userId, start, end):
     start = start
@@ -86,13 +83,15 @@ def expensesReport(userId, start, end):
                 "expenseName": expenseName,
                 "itemName": itemName,
                 "price": price,
-                "date": date
+                "date": date,
             })
-
+        total_expenses = sum([data['price'] for data in report_data])
+        total_expenses = ({"Total" : total_expenses})
+        report_file.write(f"\nTotal Expenses: {total_expenses}")
         report_file.write(f'\nReport generated for user {userId} on {datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")}')
 
     cursor.close()
-    return report_path, report_data
+    return report_path, report_data, total_expenses
 
 def assetsReport(userId, start, end):
     userId = userId
@@ -131,11 +130,13 @@ def assetsReport(userId, start, end):
                 "numberOfItems": numberOfItems,
                 "date": date
             })
-
+        total_assets = sum([data['value'] for data in report_data])
+        total_assets = ({"Total" : total_assets})
+        report_file.write(f"\nTotal Assets: {total_assets}")
         report_file.write(f'\nReport generated for user {userId} on {datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")}')
 
     cursor.close()
-    return report_path, report_data
+    return report_path, report_data, total_assets
 
 def liabilitiesReport(userId, start, end):
     userId = userId
@@ -172,14 +173,18 @@ def liabilitiesReport(userId, start, end):
                 "remainingAmount": remainingAmount,
                 "dateDue": dateDue
             })
-
+        total_remaining = sum([data['remainingAmount'] for data in report_data])
+        total_Gross = sum([data['grossAmount'] for data in report_data])
+        total_liabilities = total_Gross - total_remaining
+        total_liabilities = ({"Total" : total_liabilities})
+        report_file.write(f"\nTotal Liabilities: {total_liabilities}")# To work on the logic
         report_file.write(f'\nReport generated for user {userId} on {datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")}')
 
     cursor.close()
-    return report_path, report_data
+    return report_path, report_data, total_liabilities
 
 
-# incomeReport(1)
+# incomeReport(1, Date(), Date())
 # expensesReport(1)
 # assetsReport(1)
 # liabilitiesReport(1)

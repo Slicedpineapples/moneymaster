@@ -46,11 +46,11 @@ def Date():
         date = datetime.datetime(int(year), int(month), int(day))
     # print(date, month) # Debugging purpose only
 
-    # Combining bith functins for ease when calling them in my other procedures
+    # # Combining bith functins for ease when calling them in my other procedures
 
-    month = int(month)
-    # print(f'Month is {month}, from Convert function') #Debugging only
-    month_names = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-    # print(month_names[month - 1])  #Debugging only
-    monthName = month_names[month - 1]
-    return date, monthName
+    # month = int(month)
+    # # print(f'Month is {month}, from Convert function') #Debugging only
+    # month_names = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    # # print(month_names[month - 1])  #Debugging only
+    # monthName = month_names[month - 1]
+    return date
