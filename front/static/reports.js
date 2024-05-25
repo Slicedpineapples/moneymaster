@@ -104,8 +104,15 @@ function displayReport(result, reportType) {
     tableContainer.appendChild(table);
     reportExtension.appendChild(closeButton);
     reportExtension.appendChild(tableContainer);
+
+    // Display total income
+    const totalIncomeDiv = document.createElement('div');
+    totalIncomeDiv.textContent = `Total ${reportType}: ${result.message[2].Total}`;
+    reportExtension.appendChild(totalIncomeDiv);
+
     reportExtension.style.display = 'block';
 }
+
 
 function getHeaders(reportType) {
     switch (reportType) {
