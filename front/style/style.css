@@ -1,3 +1,4 @@
+/* General Body Styles */
 body {
     font-family: Arial, sans-serif;
     display: flex;
@@ -8,6 +9,7 @@ body {
     background-color: #f4f4f4;
 }
 
+/* Dashboard Container */
 .dashboard {
     width: 100%;
     height: 90%;
@@ -21,6 +23,7 @@ body {
     border-radius: 10px;
 }
 
+/* Header Section */
 .header {
     display: flex;
     justify-content: space-between;
@@ -39,37 +42,36 @@ body {
     color: #555;
 }
 
-.logout-btn {
+/* Buttons */
+.logout-btn, .toggle-button, #Add-Income button, #Add-Expense button, #Add-Asset button, #Add-Liability button, #reportForm button {
     font-size: 14px;
     cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    transition: background-color 0.2s;
+}
+
+.logout-btn {
     background-color: red;
     color: #fff;
-    padding: 10px 15px;
-    border-radius: 5px;
-    transition: background-color 0.2s;
-    border: none;
 }
 
 .logout-btn:hover {
     background-color: darkred;
 }
 
-.toggle-button {
-    font-size: 14px;
-    cursor: pointer;
-    background-color: #e0e0e0;
-    color: black;
-    padding: 10px 15px;
-    border-radius: 5px;
-    transition: background-color 0.2s;
-    border: none;
+
+#Add-Income button, #Add-Expense button, #Add-Asset button, #Add-Liability button, #reportForm button {
+    background-color: #007BFF;
+    color: #fff;
 }
 
-.toggle-button:hover {
-    color: white;
-    background-color: gray;
+#Add-Income button:hover, #Add-Expense button:hover, #Add-Asset button:hover, #Add-Liability button:hover, #reportForm button:hover {
+    background-color: #0056b3;
 }
 
+/* Content Section */
 .content {
     display: flex;
     justify-content: space-between;
@@ -92,6 +94,7 @@ body {
     color: #555;
 }
 
+/* Cards */
 .card {
     background-color: #f9f9f9;
     border: 1px solid #ccc;
@@ -117,6 +120,7 @@ body {
     font-weight: bold;
 }
 
+/* Specific Card Types */
 .income-card {
     background-color: #e3f2fd;
     border: 1px solid #90caf9;
@@ -137,6 +141,7 @@ body {
     border: 1px solid #ffcc80;
 }
 
+/* Responsive Design */
 @media (max-width: 768px) {
     .content {
         flex-direction: column;
@@ -170,7 +175,7 @@ body {
     }
 }
 
-/* ADDINCOME && ADDEXPENSE  */
+/* Form Styles */
 #Add-Income, #Add-Expense, #Add-Asset, #Add-Liability {
     display: flex;
     flex-direction: column;
@@ -211,28 +216,14 @@ body {
     border-radius: 5px;
 }
 
-#Add-Income button, #Add-Expense button, #Add-Asset button, #Add-Liability button {
-    font-size: 14px;
-    cursor: pointer;
-    background-color: #007BFF;
-    color: #fff;
-    padding: 10px 15px;
-    border-radius: 5px;
-    transition: background-color 0.2s;
-    border: none;
-    margin-top: 20px;
-}
-
-#Add-Income button:hover, #Add-Expense button:hover, #Add-Asset button:hover, #Add-Liability button:hover {
-    background-color: #0056b3;
-}
-
+/* Message Styles */
 #incomeMessage, #expenseMessage, #assetMessage, #liabilityMessage {
     font-size: 14px;
     color: #555;
     margin-top: 10px;
 }
 
+/* Report Styles */
 #Report {
     max-width: 600px;
     margin: 0 auto;
@@ -250,7 +241,7 @@ body {
     align-items: flex-start;
 }
 
-.form-group {
+#reportForm .form-group {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
@@ -275,24 +266,24 @@ body {
     color: #333;
 }
 
+/* Report Button */
 #reportForm button {
     margin: 5px;
     padding: 8px 20px;
-    border: none;
-    border-radius: 5px;
     background-color: #1e90ff;
     color: #fff;
     cursor: pointer;
-    text-align: center;
+    border: none;
+    border-radius: 5px;
 }
 
+/* Report Message */
 #reportMessage {
     margin-top: 20px;
     text-align: center;
 }
 
-/* REPORTS */
-/* Table Container */
+/* Report Table Container */
 #reportTableContainer {
     margin-top: 20px;
     padding: 10px;
@@ -302,7 +293,7 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Table Styles */
+/* Report Table Styles */
 #reportTable {
     width: 100%;
     border-collapse: collapse;
@@ -330,4 +321,34 @@ body {
 
 #reportTable tbody tr:hover {
     background-color: #f1f1f1;
+}
+
+/* Report Extension Total Styles */
+#reportExtension {
+    display: block;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+#reportExtension .total-income {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+/* THEME */
+.toggle-button {
+    width: 35px; 
+    height: 35px;
+    background-image: url(../assets/dark.svg); 
+    background-size: cover; 
+    background-repeat: no-repeat;
+    border: none; 
+    cursor: pointer; 
+    background-color: whitesmoke;
 }
