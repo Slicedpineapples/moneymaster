@@ -4,6 +4,6 @@ __pycache__/
 api.py
 server.py
 myenv/
-.out
-.sql
+nohup.out
+moneymaster.sql
 .zip
