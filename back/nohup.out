@@ -1,0 +1,69 @@
+ * Serving Flask app 'api'
+ * Debug mode: on
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.31:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 392-011-019
+INFO:werkzeug:192.168.0.179 - - [24/May/2024 14:09:37] "OPTIONS /apiLogin HTTP/1.1" 200 -
+INFO:werkzeug:192.168.0.179 - - [24/May/2024 14:09:37] "POST /apiLogin HTTP/1.1" 200 -
+INFO:werkzeug:192.168.0.80 - - [24/May/2024 14:10:11] "OPTIONS /apiLogin HTTP/1.1" 200 -
+INFO:werkzeug:192.168.0.80 - - [24/May/2024 14:10:11] "POST /apiLogin HTTP/1.1" 200 -
+INFO:werkzeug:192.168.0.179 - - [24/May/2024 14:10:59] "OPTIONS /apiLogin HTTP/1.1" 200 -
+INFO:werkzeug:192.168.0.179 - - [24/May/2024 14:11:00] "POST /apiLogin HTTP/1.1" 200 -
+INFO:werkzeug:192.168.0.179 - - [24/May/2024 14:59:09] "OPTIONS /apiLogin HTTP/1.1" 200 -
+INFO:werkzeug:192.168.0.179 - - [24/May/2024 14:59:10] "POST /apiLogin HTTP/1.1" 200 -
+INFO:werkzeug:192.168.0.179 - - [24/May/2024 14:59:57] "OPTIONS /apiGetIncomeReport HTTP/1.1" 200 -
+INFO:werkzeug:192.168.0.179 - - [24/May/2024 14:59:57] "POST /apiGetIncomeReport HTTP/1.1" 200 -
+INFO:werkzeug:192.168.0.179 - - [24/May/2024 15:01:49] "OPTIONS /apiAddExpense HTTP/1.1" 200 -
+INFO:werkzeug:192.168.0.179 - - [24/May/2024 15:01:50] "POST /apiAddExpense HTTP/1.1" 200 -
+INFO:werkzeug:192.168.0.179 - - [24/May/2024 15:02:19] "OPTIONS /apiAddExpense HTTP/1.1" 200 -
+INFO:werkzeug:192.168.0.179 - - [24/May/2024 15:02:19] "POST /apiAddExpense HTTP/1.1" 200 -
+INFO:werkzeug:192.168.0.179 - - [24/May/2024 15:02:35] "OPTIONS /apiAddExpense HTTP/1.1" 200 -
+INFO:werkzeug:192.168.0.179 - - [24/May/2024 15:02:36] "POST /apiAddExpense HTTP/1.1" 200 -
+INFO:werkzeug:192.168.0.179 - - [24/May/2024 15:03:02] "OPTIONS /apiAddExpense HTTP/1.1" 200 -
+INFO:werkzeug:192.168.0.179 - - [24/May/2024 15:03:02] "POST /apiAddExpense HTTP/1.1" 200 -
+INFO:werkzeug:192.168.0.179 - - [24/May/2024 15:03:21] "OPTIONS /apiGetExpensesReport HTTP/1.1" 200 -
+INFO:werkzeug:192.168.0.179 - - [24/May/2024 15:03:21] "POST /apiGetExpensesReport HTTP/1.1" 200 -
+INFO:werkzeug:192.168.0.179 - - [24/May/2024 15:03:43] "OPTIONS /apiAddExpense HTTP/1.1" 200 -
+INFO:werkzeug:192.168.0.179 - - [24/May/2024 15:03:43] "POST /apiAddExpense HTTP/1.1" 200 -
+INFO:werkzeug:192.168.0.179 - - [24/May/2024 15:04:03] "OPTIONS /apiAddExpense HTTP/1.1" 200 -
+INFO:werkzeug:192.168.0.179 - - [24/May/2024 15:04:04] "POST /apiAddExpense HTTP/1.1" 200 -
+INFO:werkzeug:192.168.0.179 - - [24/May/2024 15:04:23] "OPTIONS /apiAddExpense HTTP/1.1" 200 -
+INFO:werkzeug:192.168.0.179 - - [24/May/2024 15:04:24] "POST /apiAddExpense HTTP/1.1" 200 -
+INFO:werkzeug:192.168.0.179 - - [24/May/2024 15:04:40] "OPTIONS /apiAddExpense HTTP/1.1" 200 -
+INFO:werkzeug:192.168.0.179 - - [24/May/2024 15:04:40] "POST /apiAddExpense HTTP/1.1" 200 -
+INFO:werkzeug:192.168.0.179 - - [24/May/2024 15:05:00] "OPTIONS /apiGetExpensesReport HTTP/1.1" 200 -
+INFO:werkzeug:192.168.0.179 - - [24/May/2024 15:05:00] "POST /apiGetExpensesReport HTTP/1.1" 200 -
+INFO:werkzeug:192.168.0.179 - - [24/May/2024 15:40:47] "OPTIONS /apiLogin HTTP/1.1" 200 -
+INFO:werkzeug:192.168.0.179 - - [24/May/2024 15:40:48] "POST /apiLogin HTTP/1.1" 200 -
+INFO:werkzeug:192.168.0.179 - - [24/May/2024 15:40:48] "POST /apiLogin HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/May/2024 15:43:23] "OPTIONS /apiLogin HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/May/2024 15:43:23] "POST /apiLogin HTTP/1.1" 200 -
+INFO:werkzeug:192.168.0.179 - - [24/May/2024 15:44:45] "OPTIONS /apiLogin HTTP/1.1" 200 -
+INFO:werkzeug:192.168.0.179 - - [24/May/2024 15:44:45] "POST /apiLogin HTTP/1.1" 200 -
+INFO:werkzeug:192.168.0.179 - - [24/May/2024 15:48:02] "OPTIONS /apiLogin HTTP/1.1" 200 -
+INFO:werkzeug:192.168.0.179 - - [24/May/2024 15:48:03] "POST /apiLogin HTTP/1.1" 200 -
+INFO:werkzeug:192.168.0.179 - - [24/May/2024 15:48:03] "POST /apiLogin HTTP/1.1" 200 -
+INFO:werkzeug:192.168.0.179 - - [24/May/2024 15:48:15] "OPTIONS /apiLogin HTTP/1.1" 200 -
+INFO:werkzeug:192.168.0.179 - - [24/May/2024 15:48:15] "POST /apiLogin HTTP/1.1" 200 -
+INFO:werkzeug:192.168.0.179 - - [24/May/2024 15:48:38] "OPTIONS /apiGetExpensesReport HTTP/1.1" 200 -
+INFO:werkzeug:192.168.0.179 - - [24/May/2024 15:48:38] "POST /apiGetExpensesReport HTTP/1.1" 200 -
+INFO:werkzeug:192.168.0.179 - - [24/May/2024 15:49:48] "OPTIONS /apiLogin HTTP/1.1" 200 -
+INFO:werkzeug:192.168.0.179 - - [24/May/2024 15:49:48] "POST /apiLogin HTTP/1.1" 200 -
+INFO:werkzeug:192.168.0.179 - - [24/May/2024 15:50:45] "OPTIONS /apiGetAssetsReport HTTP/1.1" 200 -
+INFO:werkzeug:192.168.0.179 - - [24/May/2024 15:50:45] "POST /apiGetAssetsReport HTTP/1.1" 200 -
+INFO:werkzeug:192.168.0.234 - - [24/May/2024 15:55:03] "OPTIONS /apiLogin HTTP/1.1" 200 -
+INFO:werkzeug:192.168.0.234 - - [24/May/2024 15:55:03] "POST /apiLogin HTTP/1.1" 200 -
+INFO:werkzeug:192.168.0.234 - - [24/May/2024 15:55:18] "OPTIONS /apiGetExpensesReport HTTP/1.1" 200 -
+INFO:werkzeug:192.168.0.234 - - [24/May/2024 15:55:19] "POST /apiGetExpensesReport HTTP/1.1" 200 -
+INFO:werkzeug:192.168.0.179 - - [24/May/2024 16:38:10] "OPTIONS /apiLogin HTTP/1.1" 200 -
+INFO:werkzeug:192.168.0.179 - - [24/May/2024 16:38:10] "POST /apiLogin HTTP/1.1" 200 -
+INFO:werkzeug:192.168.0.179 - - [24/May/2024 16:38:11] "POST /apiLogin HTTP/1.1" 200 -
+INFO:werkzeug:192.168.0.179 - - [24/May/2024 16:43:34] "OPTIONS /apiGetIncomeReport HTTP/1.1" 200 -
+INFO:werkzeug:192.168.0.179 - - [24/May/2024 16:43:34] "POST /apiGetIncomeReport HTTP/1.1" 200 -
+INFO:werkzeug:192.168.0.179 - - [24/May/2024 20:27:19] "OPTIONS /apiLogin HTTP/1.1" 200 -
+INFO:werkzeug:192.168.0.179 - - [24/May/2024 20:27:19] "POST /apiLogin HTTP/1.1" 200 -

@@ -3,5 +3,7 @@ reports/
 __pycache__/
 api.py
 server.py
-
-
+myenv/
+.out
+.sql
+.zip
