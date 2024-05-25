@@ -107,8 +107,19 @@ function displayReport(result, reportType) {
 
     // Display total income
     const totalIncomeDiv = document.createElement('div');
+    totalIncomeDiv.className = 'total-income';
     totalIncomeDiv.textContent = `Total ${reportType}: ${result.message[2].Total}`;
     reportExtension.appendChild(totalIncomeDiv);
+
+    // Add CSS for total income
+    const totalIncomeStyle = document.createElement('style');
+    totalIncomeStyle.textContent = `
+        .total-income {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    `;
+    document.head.appendChild(totalIncomeStyle);
 
     reportExtension.style.display = 'block';
 }
