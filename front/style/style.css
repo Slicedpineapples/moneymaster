@@ -346,7 +346,7 @@ body {
 .toggle-button {
     width: 35px; 
     height: 35px;
-    background-image: url(../assets/dark.svg); 
+    background-image: url(../assets/light.svg); 
     background-size: cover; 
     background-repeat: no-repeat;
     border: none; 
