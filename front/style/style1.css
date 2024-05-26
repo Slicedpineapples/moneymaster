@@ -4,7 +4,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: auto;
     margin: 0;
     background-color: #121212;
     color: #e0e0e0; /* Text color for dark mode */
@@ -265,7 +265,7 @@ body {
     width: 120px;
     color: #e0e0e0;
     margin-right: 10px;
-    text-align: right;
+    text-align: left;
 }
 
 #reportForm select,
@@ -287,6 +287,7 @@ body {
     background-color: #1e90ff;
     color: #fff;
     cursor: pointer;
+    
 }
 
 #reportMessage {

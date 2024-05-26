@@ -4,9 +4,8 @@ if (!sessionStorage.getItem('sessionId')) {
 
 function generateReport() {
     let reportExtension = document.getElementById('report-extension');
-    let reportForm = document.getElementById('reportForm');
 
-    if (!reportForm) {
+    if (!document.getElementById('reportForm')) {
         fetch('reports.html')
             .then(response => response.text())
             .then(html => {
@@ -30,13 +29,11 @@ function attachFormSubmitHandler() {
         const end = document.getElementById('end').value;
         const userID = sessionStorage.getItem('sessionId');
 
-        // Determine the base URL based on the hostname
         const hostname = window.location.hostname;
-        let apiUrl; // initialize baseUrl
+        let apiUrl;
         if (hostname === 'localhost' || hostname === '127.0.0.1') {
             apiUrl = `http://127.0.0.1:5000/apiGet${reportType}Report`;
         } else {
-            // Change this to your server's IP address or hostname
             apiUrl = `http://${hostname}:5000/apiGet${reportType}Report`;
         }
 
@@ -54,16 +51,34 @@ function displayReport(result, reportType) {
     const reportExtension = document.getElementById('report-extension');
     reportExtension.innerHTML = '';
 
+    // Add close button to clear the generated report
+    // Add close button to clear the generated report
     const closeButton = document.createElement('button');
-    closeButton.innerHTML = 'Close Report';
-    closeButton.style.cssText = 'position: relative; color: red; font-size: 14px; cursor: pointer';
+    const closeIcon = document.createElement('img');
+    closeIcon.src = '../assets/close-dark.svg';
+    closeIcon.alt = 'Close';
+    closeIcon.style.cssText = 'vertical-align: middle; width: 25px; height: 25px;';
+    closeButton.appendChild(closeIcon);
+    closeButton.style.cssText = 'color: red; background-color: white; border-radius: 5px; border: none; font-size: 16px; cursor: pointer; margin-left: 10px; padding: 5px 10px; float: right;';
     closeButton.addEventListener('click', () => {
         reportExtension.innerHTML = '';
         reportExtension.style.display = 'none';
-        generateReport(); 
     });
+    //print button
+    const printButton = document.createElement('button');
+    const printIcon = document.createElement('img');
+    printIcon.src = '../assets/print-dark.svg';
+    printIcon.alt = 'Print';
+    printIcon.style.cssText = 'vertical-align: middle; width: 25px; height: 25px;';
+    printButton.appendChild(printIcon);
+    printButton.style.cssText = 'color: blue; background-color: white; border-radius: 5px; border: none; font-size: 16px; cursor: pointer; margin-left: 10px; padding: 5px 10px; float: right;';
+    printButton.addEventListener('click', () => {
+        printReport();
+    });
+    
 
     const tableContainer = document.createElement('div');
+    tableContainer.style.marginTop = '50px';
     tableContainer.id = 'reportTableContainer';
     tableContainer.style.display = 'block';
 
@@ -103,27 +118,28 @@ function displayReport(result, reportType) {
     table.appendChild(tbody);
     tableContainer.appendChild(table);
     reportExtension.appendChild(closeButton);
+    reportExtension.appendChild(printButton);
     reportExtension.appendChild(tableContainer);
 
-    // Display total income
     const totalIncomeDiv = document.createElement('div');
     totalIncomeDiv.className = 'total-income';
     totalIncomeDiv.textContent = `Total ${reportType}: ${result.message[2].Total}`;
     reportExtension.appendChild(totalIncomeDiv);
 
-    // Add CSS for total income
-    const totalIncomeStyle = document.createElement('style');
-    totalIncomeStyle.textContent = `
-        .total-income {
-            font-weight: bold;
-            margin-top: 10px;
-        }
-    `;
-    document.head.appendChild(totalIncomeStyle);
-
     reportExtension.style.display = 'block';
 }
 
+function printReport() {
+    const reportExtension = document.getElementById('report-extension');
+    const printWindow = window.open('', '_blank');
+    printWindow.document.write('<html><head><title>Report</title>');
+    printWindow.document.write('<style>table { border-collapse: collapse; width: 100%; } table, th, td { border: 1px solid black; padding: 8px; text-align: left; } .total-income { font-weight: bold; margin-top: 10px; }</style>');
+    printWindow.document.write('</head><body>');
+    printWindow.document.write(reportExtension.innerHTML);
+    printWindow.document.write('</body></html>');
+    printWindow.document.close();
+    printWindow.print();
+}
 
 function getHeaders(reportType) {
     switch (reportType) {

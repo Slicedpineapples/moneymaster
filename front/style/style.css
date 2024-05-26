@@ -4,7 +4,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: auto;
     margin: 0;
     background-color: #f4f4f4;
 }
@@ -141,6 +141,7 @@ body {
     border: 1px solid #ffcc80;
 }
 
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .content {
@@ -252,7 +253,7 @@ body {
     width: 120px;
     color: #333;
     margin-right: 10px;
-    text-align: right;
+    text-align: left;
 }
 
 #reportForm select,

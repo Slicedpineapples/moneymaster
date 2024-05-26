@@ -1,9 +1,7 @@
-// dashboard.js
-
 // Check if session ID is set
 if (!sessionStorage.getItem('sessionId')) {
     // Redirect to login page or display an error message
-    window.location.href = 'login.html';
+    window.location.href = '/';
 }
 
 // MISC
