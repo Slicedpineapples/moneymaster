@@ -19,13 +19,13 @@
             <div class="section">
                 <h2>Income Statement</h2>
 
-                <div class="card income-card">
+                <div class="card income-card"onclick="plusIncome()">
                     <div class="label">Income</div>
                     <div class="add-btn" onclick="plusIncome()">+</div>
                 </div>
                 <div id="income-extension" style="display:none;"></div>
 
-                <div class="card expense-card">
+                <div class="card expense-card"onclick="plusExpense()">
                     <div class="label">Expenses</div>
                     <div class="add-btn" onclick="plusExpense()">+</div>
                 </div>
@@ -33,19 +33,19 @@
             </div>
                 <div class="section">
                     <h2> Balance Sheet</h2>
-                    <div class="card asset-card">
+                    <div class="card asset-card"onclick="plusAsset()">
                         <div class="label">Assets</div>
                         <div class="add-btn" onclick="plusAsset()">+</div>
                     </div>
                     <div id="asset-extension" style="display:none;"></div>
-                    <div class="card liability-card">
+                    <div class="card liability-card"onclick="plusLiability()">
                         <div class="label">Liabilities</div>
                         <div class="add-btn"onclick="plusLiability()">+</div>
                     </div>
                     <div id="liability-extension" style="display:none;"></div>
                 </div>
             </div>
-            <div class="card Reports-card">
+            <div class="card reports-card"onclick="generateReport()">
                 <div class="label">Reports</div>
                 <div class="add-btn"onclick="generateReport()">+</div>
             </div>
