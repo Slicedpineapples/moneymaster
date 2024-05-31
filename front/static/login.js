@@ -19,7 +19,7 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
     });
     
     const result = await response.json();
-    console.log(hostname, apiUrl, result)
+    // console.log(hostname, apiUrl, result) // Debugging
     const userID = result.message[0];
     if (result.message[1] === 'Login successful!') {
         sessionStorage.setItem('sessionId', userID);

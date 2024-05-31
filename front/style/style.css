@@ -226,12 +226,12 @@ body {
 
 /* Report Styles */
 #Report {
-    max-width: 600px;
+    max-width: 500px;
     margin: 0 auto;
 }
 
 #Report h2 {
-    text-align: left;
+    text-align: center;
     margin-bottom: 20px;
 }
 
@@ -245,8 +245,8 @@ body {
 #reportForm .form-group {
     display: flex;
     align-items: center;
-    margin-bottom: 10px;
-    width: 100%;
+    margin-bottom: 20px;
+    width: 90%;
 }
 
 #reportForm label {

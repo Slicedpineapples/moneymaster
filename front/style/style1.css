@@ -182,7 +182,7 @@ body {
     color: #a0a0a0;
 }
 
-#Add-Income form, #Add-Expense form, #Add-Asset form, #Add-Liability form {
+#Add-Income form, #Add-Expense form, #Add-Asset form, #Add-Liability form{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -238,12 +238,12 @@ body {
 
 /* Report Styles */
 #Report {
-    max-width: 600px;
+    max-width: 500px;
     margin: 0 auto;
 }
 
 #Report h2 {
-    text-align: left;
+    text-align: center;
     margin-bottom: 20px;
 }
 
@@ -257,8 +257,8 @@ body {
 #reportForm .form-group {
     display: flex;
     align-items: center;
-    margin-bottom: 10px;
-    width: 100%;
+    margin-bottom: 20px;
+    width: 90%;
 }
 
 #reportForm label {
