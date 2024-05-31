@@ -80,7 +80,7 @@ function displayReport(result, reportType) {
     const tableContainer = document.createElement('div');
     tableContainer.style.marginTop = '50px';
     tableContainer.id = 'reportTableContainer';
-    tableContainer.style.display = 'block';
+    tableContainer.style.display = 'flex';
 
     const table = document.createElement('table');
     table.id = 'reportTable';
@@ -120,10 +120,11 @@ function displayReport(result, reportType) {
     reportExtension.appendChild(closeButton);
     reportExtension.appendChild(printButton);
     reportExtension.appendChild(tableContainer);
-
     const totalIncomeDiv = document.createElement('div');
     totalIncomeDiv.className = 'total-income';
     totalIncomeDiv.textContent = `Total ${reportType}: ${result.message[2].Total}`;
+    totalIncomeDiv.style.fontWeight = 'bold';
+    totalIncomeDiv.style.marginTop = '10px';
     reportExtension.appendChild(totalIncomeDiv);
 
     reportExtension.style.display = 'block';
