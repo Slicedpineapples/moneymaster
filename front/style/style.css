@@ -1,5 +1,5 @@
 :root {
-    --transition-duration: 0.8s;
+    --transition-duration: 0.7s;
     --transition-property: all;
     --transition-timing-function: ease;
     --transition: var(--transition-property) var(--transition-duration) var(--transition-timing-function);
@@ -69,10 +69,13 @@ body {
 .logout-btn {
     background-color: red;
     color: #fff;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    transition: var(--transition);
 }
 
 .logout-btn:hover {
     background-color: darkred;
+    transition: var(--transition);
 }
 
 #Add-Income button, #Add-Expense button, #Add-Asset button, #Add-Liability button, #reportForm button {
@@ -390,8 +393,7 @@ body {
     margin-bottom: 10px;
     transition: var(--transition);
 }
-
-/* THEME */
+/* Light Mode */
 .toggle-button {
     width: 35px;
     height: 35px;
