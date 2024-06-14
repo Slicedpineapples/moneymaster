@@ -8,4 +8,4 @@ nohup.out
 moneymaster.sql
 .zip
 # More files to ignore
-.pdf
+*.pdf
