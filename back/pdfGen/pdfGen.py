@@ -12,7 +12,7 @@ def createPDF(file_name):
     c.setLineWidth(1.5)
     c.rect(50, height - 58, 510, 30)
     c.setFont("Helvetica-Bold", 14)
-    c.drawString(100, height - 50, f'Monthly Report: {datetime.now().strftime("%B %Y")}')
+    c.drawString(100, height - 50, f'Monthly Report:                                 {datetime.now().strftime("%B %Y")}')
     
     return c, width, height
 
