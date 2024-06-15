@@ -1,7 +1,6 @@
 from server import connect
 from utils import Date, makeDir
 import datetime
-import flask
 
 makeDir() 
 
