@@ -81,4 +81,4 @@ def expensesRawData(userId, start, end):
     return report_data, total_expenses
 
 
-# print(expensesRawData(2, '2024-05-01', '2024-6-30')) #testing the function
+print(expensesRawData(2, '2024-05-01', '2024-6-30')[1]) #testing the function

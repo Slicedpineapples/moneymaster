@@ -110,8 +110,8 @@ def generateReport(file_name, income_data, expenses_data, assets_data, liabiliti
 rawIncome = incomeRawData(2, '2024-05-01', '2024-5-30')
 income_data = rawIncome[0]
 
-rewExpenses = expensesRawData(2, '2024-05-01', '2024-6-30')
-expenses_data = rewExpenses[0]
+rawExpenses = expensesRawData(2, '2024-05-01', '2024-6-30')
+expenses_data = rawExpenses[0]
 
 assets_data = [
     {"Category": "Savings", "Amount": 50000},
@@ -130,8 +130,8 @@ liabilities_data = [
 ]
 
 total_income = rawIncome[1]
-total_expenses = 18000
-total_assets = 170000
+total_expenses = rawExpenses[1]
+total_assets = 0
 total_liabilities = 40000
 net_savings = 29000
 net_investment = 70000
