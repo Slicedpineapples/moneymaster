@@ -3,7 +3,7 @@ from reportlab.pdfgen import canvas
 from reportlab.lib import colors
 from datetime import datetime
 
-from rawData import incomeRawData
+from rawData import expensesRawData, incomeRawData
 
 def createPDF(file_name):
     c = canvas.Canvas(file_name, pagesize=A4)
@@ -40,7 +40,7 @@ def addExpensesData(c, width, height, start_height, expenses_data):
     start_height -= 20
     c.rect(50, start_height - len(expenses_data) * 20, 240, len(expenses_data) * 20+30)
     for i, data in enumerate(expenses_data):
-        c.drawString(70, start_height - i * 20, f"{data['Category']}: {data['Amount']}")
+        c.drawString(70, start_height - i * 20, f"{data['expenseName']}: {data['total_price']}")
     return start_height - len(expenses_data) * 20 - 20
 
 def addAssetsData(c, width, height, start_height, assets_data):
@@ -110,13 +110,10 @@ def generateReport(file_name, income_data, expenses_data, assets_data, liabiliti
 
 rawIncome = incomeRawData(2, '2024-05-01', '2024-5-30')
 income_data = rawIncome[0]
-expenses_data = [
-    {"Category": "Rent", "Amount": 10000},
-    {"Category": "Groceries", "Amount": 5000},
-    {"Category": "Utilities", "Amount": 3000},
-    {"Category": "Rent", "Amount": 10000},
-    
-]
+
+rewExpenses = expensesRawData(2, '2024-05-01', '2024-6-30')
+expenses_data = rewExpenses[0]
+
 assets_data = [
     {"Category": "Savings", "Amount": 50000},
     {"Category": "Stocks", "Amount": 20000},
