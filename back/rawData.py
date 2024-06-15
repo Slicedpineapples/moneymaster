@@ -81,4 +81,37 @@ def expensesRawData(userId, start, end):
     return report_data, total_expenses
 
 
-print(expensesRawData(2, '2024-05-01', '2024-6-30')[1]) #testing the function
+# print(expensesRawData(2, '2024-05-01', '2024-6-30')[1]) #testing the function
+
+#Making a select querry for assets. It will fetch all assets, then categorice them by category and sum them up.The result will be a list of dictionaries.
+def assetsRawData(userId, start, end):
+    assets = connect()
+    cursor = assets.cursor()
+
+    cursor.execute("SELECT assetCategoryId, value FROM assets WHERE userId = %s AND date BETWEEN %s AND %s", (userId, start, end))
+    result1 = cursor.fetchall()
+
+    report_data = []
+    for row in result1:
+        assetCategoryId = row[0]
+        value = row[1]
+
+        cursor.execute("SELECT assetName, numberOfItems, location FROM assetsCategory WHERE id = %s", (assetCategoryId,))
+        result2 = cursor.fetchall()
+        assetName = result2[0][0]
+        numberOfItems = result2[0][1]
+        location = result2[0][2]
+
+        report_data.append({
+            "location": location,
+            "assetName": assetName,
+            "value": value,
+            "numberOfItems": numberOfItems,
+        })
+    total_assets = sum([data['value'] for data in report_data])
+    total_assets = ({total_assets})
+    total_assets = total_assets.pop()   #parsing it as a float
+
+    cursor.close()
+    return report_data, total_assets
+print(assetsRawData(2, '2024-05-01', '2024-5-31')) #testing the function
