@@ -34,7 +34,6 @@ def addIncomeData(c, width, height, start_height, income_data):
     return start_height - len(income_data) * 20 - 20
 
 def addExpensesData(c, width, height, start_height, expenses_data):
-    # Expenses Summary
     c.setFont("Helvetica-Bold", 10)
     c.drawString(60, start_height-5, "Expenses:")
     start_height -= 20
