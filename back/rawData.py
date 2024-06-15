@@ -1,6 +1,6 @@
 from server import connect
 #Making a select querry for income. It will fetch all incomes, then categorice them by category and sum them up.The result will be a list of dictionaries.
-def incomeReport(userId, start, end):
+def incomeRawData(userId, start, end):
     income = connect()
     cursor = income.cursor()
 
@@ -28,8 +28,9 @@ def incomeReport(userId, start, end):
             "incomeName": incomeName,
         })
     total_income = sum([data['amount'] for data in report_data])
-    total_income = ({"Total" : total_income})
+    total_income = ({total_income}) #parsing it a s float
+    total_income = total_income.pop() #parsing it as a float
 
-    return report_data, total_income
+    return  report_data, total_income
 
-print(incomeReport(2, '2024-05-01', '2024-5-31'))
+# print(incomeRawData(2, '2024-05-01', '2024-5-31')[1]) #testing the function
