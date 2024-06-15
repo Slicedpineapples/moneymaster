@@ -5,6 +5,25 @@ from datetime import datetime
 
 from rawData import expensesRawData, incomeRawData, assetsRawData, liabilitiesRawData
 
+rawIncome = incomeRawData(1, '2024-05-01', '2024-5-30')
+income_data = rawIncome[0]
+
+rawExpenses = expensesRawData(1, '2024-05-01', '2024-6-30')
+expenses_data = rawExpenses[0]
+
+rawAssets =  assetsRawData(1, '2024-05-01', '2024-6-30')
+assets_data = rawAssets[0]
+
+rawLiabilities = liabilitiesRawData(1, '2024-05-01', '2024-6-30')
+liabilities_data = rawLiabilities[0]
+
+total_income = rawIncome[1]
+total_expenses = rawExpenses[1]
+total_assets = rawAssets[1]
+total_liabilities = rawLiabilities[1]
+net_savings = total_income - total_expenses
+net_investment = total_assets - total_liabilities
+
 def createPDF(file_name):
     c = canvas.Canvas(file_name, pagesize=A4)
     width, height = A4
@@ -83,7 +102,8 @@ def addFinancialStanding(c, width, height, start_height, total_income, total_exp
     return start_height - 100
 
 def generateReport(file_name, income_data, expenses_data, assets_data, liabilities_data, total_income, total_expenses, total_assets, total_liabilities, net_savings, net_investment):
-    c, width, height = createPDF(file_name)
+    c, width, height = createPDF('reports/monthlyReports/' + file_name)
+
     
     # Draw big rectangle enclosing everything
     c.rect(40, height - 800, 530, 780)
@@ -106,25 +126,6 @@ def generateReport(file_name, income_data, expenses_data, assets_data, liabiliti
     
     # Save the PDF
     c.save()
-
-rawIncome = incomeRawData(2, '2024-05-01', '2024-5-30')
-income_data = rawIncome[0]
-
-rawExpenses = expensesRawData(2, '2024-05-01', '2024-6-30')
-expenses_data = rawExpenses[0]
-
-rawAssets =  assetsRawData(2, '2024-05-01', '2024-6-30')
-assets_data = rawAssets[0]
-rawLiabilities = liabilitiesRawData(2, '2024-05-01', '2024-6-30')
-liabilities_data = rawLiabilities[0]
-
-total_income = rawIncome[1]
-total_expenses = rawExpenses[1]
-total_assets = rawAssets[1]
-total_liabilities = rawLiabilities[1]
-net_savings = 29000
-net_investment = 70000
-
 # Generate the report
 generateReport(
     f'{datetime.now().strftime("%B %Y")}.pdf',
