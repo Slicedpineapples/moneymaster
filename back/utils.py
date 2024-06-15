@@ -16,6 +16,9 @@ def makeDir():
     folder = 'reports/IncomeReports'
     if not os.path.exists(folder):
         os.makedirs(folder)
+    folder = 'reports/monthlyReports'
+    if not os.path.exists(folder):
+        os.makedirs(folder)
 
 def Date():
     defaultdate = datetime.datetime.now()
