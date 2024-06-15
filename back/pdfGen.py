@@ -3,7 +3,7 @@ from reportlab.pdfgen import canvas
 from reportlab.lib import colors
 from datetime import datetime
 
-from rawData import expensesRawData, incomeRawData, assetsRawData
+from rawData import expensesRawData, incomeRawData, assetsRawData, liabilitiesRawData
 
 def createPDF(file_name):
     c = canvas.Canvas(file_name, pagesize=A4)
@@ -64,7 +64,7 @@ def addLiabilitiesData(c, width, height, start_height, liabilities_data):
     start_height -= 20
     c.rect(300, start_height - len(liabilities_data) * 20, 260, len(liabilities_data) * 20+30)
     for i, data in enumerate(liabilities_data):
-        c.drawString(320, start_height - i * 20, f"{data['Category']}: {data['Amount']}")
+        c.drawString(320, start_height - i * 20, f"{data['liabilityName']}: {data['grossAmount']} (Due: {data['dateDue']})")
     return start_height - len(liabilities_data) * 20 - 20
 
 def addFinancialStanding(c, width, height, start_height, total_income, total_expenses, total_assets, total_liabilities, net_savings, net_investment):
@@ -113,22 +113,15 @@ income_data = rawIncome[0]
 rawExpenses = expensesRawData(2, '2024-05-01', '2024-6-30')
 expenses_data = rawExpenses[0]
 
-assetsRaw =  assetsRawData(2, '2024-05-01', '2024-6-30')
-assets_data = assetsRaw[0]
-liabilities_data = [
-    {"Category": "Loan", "Amount": 30000},
-    {"Category": "Credit Card", "Amount": 10000},
-    {"Category": "Loan", "Amount": 30000},
-    {"Category": "Credit Card", "Amount": 10000},
-    {"Category": "Loan", "Amount": 30000},
-    {"Category": "Credit Card", "Amount": 10000},
-    
-]
+rawAssets =  assetsRawData(2, '2024-05-01', '2024-6-30')
+assets_data = rawAssets[0]
+rawLiabilities = liabilitiesRawData(2, '2024-05-01', '2024-6-30')
+liabilities_data = rawLiabilities[0]
 
 total_income = rawIncome[1]
 total_expenses = rawExpenses[1]
-total_assets = 0
-total_liabilities = 40000
+total_assets = rawAssets[1]
+total_liabilities = rawLiabilities[1]
 net_savings = 29000
 net_investment = 70000
 

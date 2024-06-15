@@ -114,4 +114,39 @@ def assetsRawData(userId, start, end):
 
     cursor.close()
     return report_data, total_assets
-print(assetsRawData(2, '2024-05-01', '2024-5-31')) #testing the function
+# print(assetsRawData(2, '2024-05-01', '2024-5-31')) #testing the function
+
+#Making a select querry for liabilities. It will fetch all liabilities, then categorice them by category and sum them up.The result will be a list of dictionaries.
+def liabilitiesRawData(userId, start, end):
+    liabilities = connect()
+    cursor = liabilities.cursor()
+
+    cursor.execute("SELECT liabilityCategoryId, dateDue FROM liabilities WHERE userId = %s AND dateDue BETWEEN %s AND %s", (userId, start, end))
+    result1 = cursor.fetchall()
+
+    report_data = []
+    for row in result1:
+        liabilityCategoryId = row[0]
+        dateDue = row[1]
+
+        cursor.execute("SELECT liabilityName, grossAmount, remainingAmount FROM liabilitiesCategory WHERE id = %s", (liabilityCategoryId,))
+        result2 = cursor.fetchall()
+        liabilityName = result2[0][0]
+        grossAmount = result2[0][1]
+        remainingAmount = result2[0][2]
+
+        report_data.append({
+            "liabilityName": liabilityName,
+            "grossAmount": grossAmount,
+            "remainingAmount": remainingAmount,
+            "dateDue": dateDue
+        })
+    total_remaining = sum([data['remainingAmount'] for data in report_data])
+    total_Gross = sum([data['grossAmount'] for data in report_data])
+    total_liabilities = total_Gross - total_remaining
+    total_liabilities = ({total_liabilities})
+    total_liabilities = total_liabilities.pop()  #parsing it as a float
+
+    cursor.close()
+    return report_data, total_liabilities
+# print(liabilitiesRawData(2, '2024-05-01', '2024-5-31')) #testing the function
