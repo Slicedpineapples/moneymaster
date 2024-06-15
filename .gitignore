@@ -9,3 +9,4 @@ moneymaster.sql
 .zip
 # More files to ignore
 *.pdf
+test.fpdf.py
