@@ -11,3 +11,8 @@ moneymaster.sql
 *.pdf
 test.fpdf.py
 mess.py
+build/
+dist/
+.spec
+.pkh
+.exe

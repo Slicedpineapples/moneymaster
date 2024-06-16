@@ -59,7 +59,7 @@ def addAssetsData(c, width, height, start_height, assets_data):
     start_height -= 20
     c.rect(300, start_height - len(assets_data) * 20, 260, len(assets_data) * 20+30)
     for i, data in enumerate(assets_data):
-        c.drawString(320, start_height - i * 20, f'{data['numberOfItems']} {data['assetName']} ({data['location']}): {data['value']}')
+        c.drawString(320, start_height - i * 20, f"{data['numberOfItems']} {data['assetName']} ({data['location']}): {data['value']}")
     return start_height - len(assets_data) * 20 - 20
 
 def addLiabilitiesData(c, width, height, start_height, liabilities_data):
