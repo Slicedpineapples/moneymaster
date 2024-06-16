@@ -1,5 +1,13 @@
 if (!sessionStorage.getItem('sessionId')) {
     window.location.href = '/login';
+// Sorting hostname for API URL
+const hostname = window.location.hostname;
+let apiUrl;
+if (hostname === 'localhost' || hostname === '127.0.0.1') {
+    apiUrl = 'http://127.0.0.1:5000/';
+} else {
+    apiUrl = `http://${hostname}:5000/`;
+}
 }
 
 function summary() {
