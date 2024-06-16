@@ -10,3 +10,4 @@ moneymaster.sql
 # More files to ignore
 *.pdf
 test.fpdf.py
+mess.py
