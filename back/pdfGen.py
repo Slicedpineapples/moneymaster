@@ -117,6 +117,7 @@ def generateReport(file_name, income_data, expenses_data, assets_data, liabiliti
 
 # Consolidated the test data into a function to be called by the API
 def apiGenReport(userId, start, end):
+    success = 'Summary report generated successfully'
     rawIncome = incomeRawData(userId, start, end)
     income_data = rawIncome[0]
 
@@ -155,6 +156,6 @@ def apiGenReport(userId, start, end):
         net_savings,
         net_investment
     )
-    return file_name
+    return file_name, success
 
 # print(apiGenReport(2, '2024-03-01', '2024-03-30')) #testing the function
