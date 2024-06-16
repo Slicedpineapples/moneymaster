@@ -5,26 +5,12 @@ from datetime import datetime
 
 from rawData import expensesRawData, incomeRawData, assetsRawData, liabilitiesRawData
 
-rawIncome = incomeRawData(1, '2024-05-01', '2024-5-30')
-income_data = rawIncome[0]
 
-rawExpenses = expensesRawData(1, '2024-05-01', '2024-6-30')
-expenses_data = rawExpenses[0]
-
-rawAssets =  assetsRawData(1, '2024-05-01', '2024-6-30')
-assets_data = rawAssets[0]
-
-rawLiabilities = liabilitiesRawData(1, '2024-05-01', '2024-6-30')
-liabilities_data = rawLiabilities[0]
-
-total_income = rawIncome[1]
-total_expenses = rawExpenses[1]
-total_assets = rawAssets[1]
-total_liabilities = rawLiabilities[1]
-net_savings = total_income - total_expenses
-net_investment = total_assets - total_liabilities
-
+#misc
 def createPDF(file_name):
+
+    # month = datetime.strptime(end, '%Y-%m-%d').strftime('%B')
+    # year = datetime.strptime(end, '%Y-%m-%d').strftime('%Y')
     c = canvas.Canvas(file_name, pagesize=A4)
     width, height = A4
 
@@ -33,7 +19,7 @@ def createPDF(file_name):
     c.setLineWidth(1.5)
     c.rect(50, height - 58, 510, 30)
     c.setFont("Helvetica-Bold", 14)
-    c.drawString(100, height - 50, f'Monthly Report:                                 {datetime.now().strftime("%B %Y")}')
+    c.drawString(100, height - 50, f'Monthly Report:                                 ')
     
     return c, width, height
 
@@ -127,16 +113,48 @@ def generateReport(file_name, income_data, expenses_data, assets_data, liabiliti
     # Save the PDF
     c.save()
 # Generate the report
-generateReport(
-    f'{datetime.now().strftime("%B %Y")}.pdf',
-    income_data,
-    expenses_data,
-    assets_data,
-    liabilities_data,
-    total_income,
-    total_expenses,
-    total_assets,
-    total_liabilities,
-    net_savings,
-    net_investment
-)
+
+
+# Consolidated the test data into a function to be called by the API
+def apiGenReport(userId, start, end):
+    rawIncome = incomeRawData(userId, start, end)
+    income_data = rawIncome[0]
+
+    rawExpenses = expensesRawData(userId, start, end)
+    expenses_data = rawExpenses[0]
+
+    rawAssets =  assetsRawData(userId, start, end)
+    assets_data = rawAssets[0]
+
+    rawLiabilities = liabilitiesRawData(userId, start, end)
+    liabilities_data = rawLiabilities[0]
+
+    total_income = rawIncome[1]
+    total_expenses = rawExpenses[1]
+    total_assets = rawAssets[1]
+    total_liabilities = rawLiabilities[1]
+    net_savings = total_income - total_expenses
+    net_investment = total_assets - total_liabilities
+
+
+    # Getting the month from the end date
+    month = datetime.strptime(end, '%Y-%m-%d').strftime('%B')
+    year = datetime.strptime(end, '%Y-%m-%d').strftime('%Y')
+
+    file_name = f'SR-UID-{userId}-{month}{year}.pdf'
+    generateReport(
+        file_name,
+        income_data,
+        expenses_data,
+        assets_data,
+        liabilities_data,
+        total_income,
+        total_expenses,
+        total_assets,
+        total_liabilities,
+        net_savings,
+        net_investment
+    )
+    return file_name
+
+# print(apiGenReport(2, '2024-03-01', '2024-03-30')) #testing the function
