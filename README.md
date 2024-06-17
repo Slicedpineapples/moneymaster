@@ -11,4 +11,6 @@ To successfully run the application, ensure you have the following Python depend
 4. mysql-connector
 5. Requests
 6. PHP 7.4 FPM
+7. ReportLab
+
 For more information on using pip, see [this guide](https://shorturl.at/10iB9).
