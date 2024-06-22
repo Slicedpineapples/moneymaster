@@ -59,15 +59,16 @@ def login(username, password):
         connection = connect()
         cursor = connection.cursor()
         
-        sql = "SELECT id, userName FROM user WHERE userName = %s AND password = %s"
+        sql = "SELECT id, userName, email FROM user WHERE userName = %s AND password = %s"
         values = (username, password)
         cursor.execute(sql, values)
         result = cursor.fetchone()
 
         if result:
             userid = result[0]
+            email = result[2]
             message = "Login successful!"
-            return userid, message
+            return userid, email, message
 
         else:
             message = "Invalid username or password"

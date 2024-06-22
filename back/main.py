@@ -89,8 +89,8 @@ def mainApp():
             print("Invalid choice. Try again.")
             continue
 
-try:
-    mainApp()
-except Exception as e:
-    print("Something went wrong:", e)
-    mainApp()
+# try:
+#     mainApp()
+# except Exception as e:
+#     print("Something went wrong:", e)
+#     mainApp()
