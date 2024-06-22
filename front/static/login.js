@@ -21,10 +21,11 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
     const result = await response.json();
     // console.log(hostname, apiUrl, result) // Debugging
     const userID = result.message[0];
-    if (result.message[1] === 'Login successful!') {
+    if (result.message[2] === 'Login successful!') {
         sessionStorage.setItem('sessionId', userID);
         sessionStorage.setItem('userName', username);
-        document.getElementById('loginMessage').innerText = result.message[1];
+        sessionStorage.setItem('email', result.message[1]);
+        document.getElementById('loginMessage').innerText = result.message[2];
         await new Promise(resolve => setTimeout(resolve, 2000));
         window.location.href = 'home.html';
     } else {

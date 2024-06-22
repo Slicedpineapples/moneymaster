@@ -25,7 +25,7 @@ function summary() {
                 }
 
                 const userID = sessionStorage.getItem('sessionId');
-                // console.log(userID);
+                const email = sessionStorage.getItem('email');
 
                 // Getting the form data for construction of dates
                 const form = document.getElementById('summaryForm');
@@ -52,7 +52,7 @@ function summary() {
                     // console.log('End Date:', endDate);
 
                     //jsonify the data
-                    const data = { userId: userID, start: startDate, end: endDate};
+                    const data = { userId: userID, email: email, start: startDate, end: endDate};
                     // console.log(data);
 
                     const response = await fetch(apiUrl + 'apiGetSummary', {
@@ -61,7 +61,7 @@ function summary() {
                         body: JSON.stringify(data)
                     });
                     const result = await response.json();
-                    document.getElementById('summaryMessage').innerText = result.message[1];
+                    document.getElementById('summaryMessage').innerText = result.message;
                     setTimeout(() => {
                         document.getElementById('summaryMessage').innerText = '';
                     }, 2000);

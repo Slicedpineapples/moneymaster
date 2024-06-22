@@ -16,3 +16,6 @@ dist/
 .spec
 .pkh
 .exe
+
+# More files, based on sending emails
+.env
