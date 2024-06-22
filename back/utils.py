@@ -57,3 +57,10 @@ def Date():
     # # print(month_names[month - 1])  #Debugging only
     # monthName = month_names[month - 1]
     return date
+
+def Convert(month):
+    month = int(month)
+    month_names = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    # print(month_names[month - 1])  #Debugging only
+    monthName = month_names[month - 1]
+    return monthName
