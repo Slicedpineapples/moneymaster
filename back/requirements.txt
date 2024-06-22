@@ -3,3 +3,4 @@ Marshmallow
 Flask-CORS
 mysql-connector
 Requests
+dotenv
