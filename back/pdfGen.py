@@ -156,6 +156,8 @@ def apiGenReport(userId, start, end):
         net_savings,
         net_investment
     )
-    return file_name, success
+    #temporary solution
+    file_path = 'reports/monthlyReports/' + file_name
+    return file_path, file_name, success
 
 # print(apiGenReport(2, '2024-03-01', '2024-03-30')) #testing the function
