@@ -158,6 +158,6 @@ def apiGenReport(userId, start, end):
     )
     #temporary solution
     file_path = 'reports/monthlyReports/' + file_name
-    return file_path, file_name, success
+    return file_path, success
 
 # print(apiGenReport(2, '2024-03-01', '2024-03-30')) #testing the function
