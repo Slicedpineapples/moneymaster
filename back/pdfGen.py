@@ -117,7 +117,7 @@ def generateReport(file_name, income_data, expenses_data, assets_data, liabiliti
 
 # Consolidated the test data into a function to be called by the API
 def apiGenReport(userId, start, end):
-    success = 'Summary report generated successfully.' #It will be sent to your email
+    success = 'Summary report generated successfully.\nWe have sent it to your email.' #It will be sent to your email
     rawIncome = incomeRawData(userId, start, end)
     income_data = rawIncome[0]
 
