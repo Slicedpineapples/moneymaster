@@ -1,8 +1,9 @@
 document.getElementById('signupForm').addEventListener('submit', async (e) => {
     e.preventDefault();
-    const username = document.getElementById('username').value;
-    const email = document.getElementById('email').value;
-    const phone = document.getElementById('phone').value;
+    //Stripping empty spaces during signup
+    const username = document.getElementById('username').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
     const password = document.getElementById('password').value;
 
     //Determine the base URL based on the hostname
@@ -23,7 +24,7 @@ document.getElementById('signupForm').addEventListener('submit', async (e) => {
     const result = await response.json();
     if (result.message === 'User created successfully!') {
         document.getElementById('signupMessage').innerText = result.message;
-        await new Promise(resolve => setTimeout(resolve, 2000));
+        await new Promise(resolve => setTimeout(resolve, 1000));
         window.location.href = 'login.html';
     }
 });

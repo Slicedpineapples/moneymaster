@@ -1,6 +1,7 @@
 document.getElementById('loginForm').addEventListener('submit', async (e) => {
     e.preventDefault();
-    const username = document.getElementById('username').value;
+    //Stripping empty spaces from the username
+    const username = document.getElementById('username').value.trim();
     const password = document.getElementById('password').value;
 
     // Determine the base URL based on the hostname
@@ -26,11 +27,11 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
         sessionStorage.setItem('userName', username);
         sessionStorage.setItem('email', result.message[1]);
         document.getElementById('loginMessage').innerText = result.message[2];
-        await new Promise(resolve => setTimeout(resolve, 2000));
+        await new Promise(resolve => setTimeout(resolve, 1000));
         window.location.href = 'home.html';
     } else {
         document.getElementById('loginMessage').innerText = result.message[1];
-        await new Promise(resolve => setTimeout(resolve, 2000));
+        await new Promise(resolve => setTimeout(resolve, 1000));
         window.location.href = 'login.html';
     }
 });
