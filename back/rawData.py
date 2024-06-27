@@ -167,4 +167,4 @@ def liabilitiesRawData(userId, start, end, currency):
 # print(incomeRawData(1, '2024-05-01', '2024-5-31', "KES")) #testing the function
 # print(expensesRawData(1, '2024-05-01', '2024-6-30', "HUF")) #testing the function
 # print(assetsRawData(1, '2024-05-01', '2024-5-31', "HUF")) #testing the function
-# print(liabilitiesRawData(1, '2024-05-01', '2024-5-31', "KES")) #testing the function
+# print(liabilitiesRawData(1, '2024-05-01', '2024-5-31', "HUF")) #testing the function
