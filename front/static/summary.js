@@ -32,7 +32,9 @@ function summary() {
                 form.addEventListener('submit', async (e) => {
                     e.preventDefault();
                     const month = document.getElementById('Month').value;
+                    const currency = document.getElementById('Currency').value;
                     //Debugging only
+                    // console.log('Currency:', currency);
                     // console.log('Month:', month);
 
                     if (!month) {
@@ -62,7 +64,7 @@ function summary() {
                     // console.log('End Date:', endDate);
 
                     //jsonify the data
-                    const data = { userId: userID, email: email, start: startDate, end: endDate};
+                    const data = { userId: userID, email: email, start: startDate, end: endDate, currency: currency};
                     // console.log(data);
 
                     const response = await fetch(apiUrl + 'apiGetSummary', {
