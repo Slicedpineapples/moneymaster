@@ -1,45 +1,51 @@
 from collections import defaultdict
 from server import connect
+from collections import defaultdict
 
 #Making a select querry for income. It will fetch all incomes, then categorice them by category and sum them up.The result will be a list of dictionaries.
 def incomeRawData(userId, start, end):
+    # Connect to the database
     income = connect()
     cursor = income.cursor()
 
+    # Fetch the relevant income records for the given user and date range
     cursor.execute("SELECT sourceAmountId, incomeCategoryId FROM income WHERE userId = %s AND date BETWEEN %s AND %s", (userId, start, end))
     result1 = cursor.fetchall()
 
-    report_data = []
+    # Initialize a defaultdict to group income amounts by incomeName
+    income_groups = defaultdict(int)
 
+    # Process each income record
     for row in result1:
         sourceAmountId = row[0]
         incomeCategoryId = row[1]
 
-        cursor.execute("SELECT amount FROM incomeSource WHERE id = %s", (sourceAmountId,)) #commented out sourceName
-        result2 = cursor.fetchall()
-        # sourceName = result2[0][0]
-        amount = result2[0][0]
+        # Fetch the amount from incomeSource table
+        cursor.execute("SELECT amount FROM incomeSource WHERE id = %s", (sourceAmountId,))
+        result2 = cursor.fetchone()
+        amount = result2[0] if result2 else 0
 
+        # Fetch the incomeName from incomeCategory table
         cursor.execute("SELECT incomeName FROM incomeCategory WHERE id = %s", (incomeCategoryId,))
-        result3 = cursor.fetchall()
-        incomeName = result3[0][0]
+        result3 = cursor.fetchone()
+        incomeName = result3[0] if result3 else "Unknown"
 
-        report_data.append({ 
-            # "sourceName": sourceName,
-            "amount": amount,
-            "incomeName": incomeName,
-        })
-    total_income = sum([data['amount'] for data in report_data])
-    total_income = ({total_income}) #parsing it a s float
-    total_income = total_income.pop() #parsing it as a float
+        # Aggregate the amount by incomeName
+        income_groups[incomeName] += amount
 
-    return  report_data, total_income
+    # Prepare the report data
+    report_data = [{"incomeName": incomeName, "amount": amount} for incomeName, amount in income_groups.items()]
+
+    # Calculate the total income
+    total_income = sum(income_groups.values())
+
+    # Return the report data and total income
+    return report_data, total_income
 
 # print(incomeRawData(2, '2024-05-01', '2024-5-31')[1]) #testing the function
 
 #Making a select querry for expenses. It will fetch all expenses, then categorice them by category and sum them up.The result will be a list of dictionaries.
 
-from collections import defaultdict
 
 def expensesRawData(userId, start, end):
     expenses = connect()
