@@ -34,7 +34,12 @@ function summary() {
                     const month = document.getElementById('Month').value;
 
                     if (!month) {
-                        console.log('Month is not selected');
+                        // console.log('Month is not selected');
+                        document.getElementById('summaryMessage').innerText = 'Please select a month';
+                        setTimeout(() => {
+                            document.getElementById('summaryMessage').innerText = '';
+                        }, 1500);
+                        
                         return;
                     }
                     //Date construction
