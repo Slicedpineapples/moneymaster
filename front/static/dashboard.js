@@ -74,9 +74,9 @@ function plusIncome() {
                     const userID = sessionStorage.getItem('sessionId');
                     document.getElementById('incomeForm').addEventListener('submit', async (e) => {
                         e.preventDefault();
-                        const sourceName = document.getElementById('sourceName').value;
-                        const amount = document.getElementById('amount').value;
-                        const incomeCategory = document.getElementById('incomeCategory').value;
+                        const sourceName = document.getElementById('sourceName').value.trim();
+                        const amount = document.getElementById('amount').value.trim();
+                        const incomeCategory = document.getElementById('incomeCategory').value.trim();
 
                         const response = await fetch(`${apiUrl}apiAddIncome`, {
                             method: 'POST',
@@ -88,10 +88,10 @@ function plusIncome() {
                         document.getElementById('incomeMessage').innerText = result.message;
                         setTimeout(() => {
                             document.getElementById('incomeMessage').innerText = '';
-                        }, 1500);
+                        }, 1000);
                         setTimeout(() => {
                             document.getElementById('incomeForm').reset();
-                        }, 2000);
+                        }, 1000);
                     });
                 });
         }
@@ -119,9 +119,9 @@ function plusExpense() {
                     const userID = sessionStorage.getItem('sessionId');
                     document.getElementById('expenseForm').addEventListener('submit', async (e) => {
                         e.preventDefault();
-                        const itemName = document.getElementById('itemName').value;
-                        const price = document.getElementById('price').value;
-                        const expenseCategory = document.getElementById('expenseCategory').value;
+                        const itemName = document.getElementById('itemName').value.trim();
+                        const price = document.getElementById('price').value.trim();
+                        const expenseCategory = document.getElementById('expenseCategory').value.trim();
 
                         const response = await fetch(`${apiUrl}apiAddExpense`, {
                             method: 'POST',
@@ -165,11 +165,11 @@ function plusAsset() {
                     console.log(userID);
                     document.getElementById('assetForm').addEventListener('submit', async (e) => {
                         e.preventDefault();
-                        const assetCategory = document.getElementById('assetCategory').value;
-                        const value = document.getElementById('value').value;
-                        const location = document.getElementById('location').value;
-                        const numberOfItems = document.getElementById('numberOfItems').value;
-                        const name = document.getElementById('name').value;
+                        const assetCategory = document.getElementById('assetCategory').value.trim();
+                        const value = document.getElementById('value').value.trim();
+                        const location = document.getElementById('location').value.trim();
+                        const numberOfItems = document.getElementById('numberOfItems').value.trim();
+                        const name = document.getElementById('name').value.trim();
 
                         const response = await fetch(`${apiUrl}apiAddAsset`, {
                             method: 'POST',
@@ -214,9 +214,9 @@ function plusLiability() {
                     console.log(userID);
                     document.getElementById('liabilityForm').addEventListener('submit', async (e) => {
                         e.preventDefault();
-                        const liabilityCategory = document.getElementById('liabilityCategory').value;
-                        const grossAmount = document.getElementById('grossAmount').value;
-                        const remainingAmount = document.getElementById('remainingAmount').value;
+                        const liabilityCategory = document.getElementById('liabilityCategory').value.trim();
+                        const grossAmount = document.getElementById('grossAmount').value.trim();
+                        const remainingAmount = document.getElementById('remainingAmount').value.trim();
                         const response = await fetch(`${apiUrl}apiAddLiability`, {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
