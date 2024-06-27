@@ -133,10 +133,10 @@ function plusExpense() {
                         document.getElementById('expenseMessage').innerText = result.message;
                         setTimeout(() => {
                             document.getElementById('expenseMessage').innerText = '';
-                        }, 1500);
+                        }, 1000);
                         setTimeout(() => {
                             document.getElementById('expenseForm').reset();
-                        }, 2000);
+                        }, 1000);
                     });
                 });
         }
@@ -181,10 +181,10 @@ function plusAsset() {
                         document.getElementById('assetMessage').innerText = result.message;
                         setTimeout(() => {
                             document.getElementById('assetMessage').innerText = '';
-                        }, 1500);
+                        }, 1000);
                         setTimeout(() => {
                             document.getElementById('assetForm').reset();
-                        }, 2000);
+                        }, 1000);
                         
                     });
                 });
@@ -226,10 +226,10 @@ function plusLiability() {
                         document.getElementById('liabilityMessage').innerText = result.message;
                         setTimeout(() => {
                             document.getElementById('liabilityMessage').innerText = '';
-                        }, 1500);
+                        }, 1000);
                         setTimeout(() => {
                             document.getElementById('liabilityForm').reset();
-                        }, 2000);
+                        }, 1000);
                     });
                 });
         }

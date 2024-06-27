@@ -32,6 +32,8 @@ function summary() {
                 form.addEventListener('submit', async (e) => {
                     e.preventDefault();
                     const month = document.getElementById('Month').value;
+                    //Debugging only
+                    // console.log('Month:', month);
 
                     if (!month) {
                         // console.log('Month is not selected');
@@ -48,6 +50,9 @@ function summary() {
                     const end = new Date(start);
                     end.setMonth(end.getMonth() + 1);
                     end.setDate(0);
+                    //Debugging only
+                    // console.log('Start Date:', start);
+                    // console.log('End Date:', end);
 
                     //Fomratting the dates to be sent to the server
                     const startDate = start.toISOString().split('T')[0];
@@ -69,10 +74,10 @@ function summary() {
                     document.getElementById('summaryMessage').innerText = result.message;
                     setTimeout(() => {
                         document.getElementById('summaryMessage').innerText = '';
-                    }, 2000);
+                    },2000);
                     setTimeout(() => {
                         document.getElementById('summaryForm').reset();
-                    }, 2000);
+                    }, 1000);
 
                 });
             });
