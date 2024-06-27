@@ -1,10 +1,12 @@
 from collections import defaultdict
 from server import connect
 from collections import defaultdict
+from utils import getExchangeRate
 
 #Making a select querry for income. It will fetch all incomes, then categorice them by category and sum them up.The result will be a list of dictionaries.
-def incomeRawData(userId, start, end):
+def incomeRawData(userId, start, end, currency):
     # Connect to the database
+    currency = getExchangeRate(currency)
     income = connect()
     cursor = income.cursor()
 
@@ -23,7 +25,7 @@ def incomeRawData(userId, start, end):
         # Fetch the amount from incomeSource table
         cursor.execute("SELECT amount FROM incomeSource WHERE id = %s", (sourceAmountId,))
         result2 = cursor.fetchone()
-        amount = result2[0] if result2 else 0
+        amount = result2[0]*currency if result2 else 0
 
         # Fetch the incomeName from incomeCategory table
         cursor.execute("SELECT incomeName FROM incomeCategory WHERE id = %s", (incomeCategoryId,))
@@ -47,7 +49,8 @@ def incomeRawData(userId, start, end):
 #Making a select querry for expenses. It will fetch all expenses, then categorice them by category and sum them up.The result will be a list of dictionaries.
 
 
-def expensesRawData(userId, start, end):
+def expensesRawData(userId, start, end, currency):
+    currency = getExchangeRate(currency)
     expenses = connect()
     cursor = expenses.cursor()
 
@@ -70,7 +73,7 @@ def expensesRawData(userId, start, end):
             result3 = cursor.fetchone()
 
             if result3:
-                price = result3[0]
+                price = result3[0]*currency # Convert the price to the target currency
                 expense_groups[expenseName] += price
 
     # Convert grouped dictionary to final report format
@@ -90,7 +93,8 @@ def expensesRawData(userId, start, end):
 # print(expensesRawData(2, '2024-05-01', '2024-6-30')[1]) #testing the function
 
 #Making a select querry for assets. It will fetch all assets, then categorice them by category and sum them up.The result will be a list of dictionaries.
-def assetsRawData(userId, start, end):
+def assetsRawData(userId, start, end, currency):
+    currency = getExchangeRate(currency)
     assets = connect()
     cursor = assets.cursor()
 
@@ -100,7 +104,7 @@ def assetsRawData(userId, start, end):
     report_data = []
     for row in result1:
         assetCategoryId = row[0]
-        value = row[1]
+        value = row[1]*currency
 
         cursor.execute("SELECT assetName, numberOfItems, location FROM assetsCategory WHERE id = %s", (assetCategoryId,))
         result2 = cursor.fetchall()
@@ -123,7 +127,8 @@ def assetsRawData(userId, start, end):
 # print(assetsRawData(2, '2024-05-01', '2024-5-31')) #testing the function
 
 #Making a select querry for liabilities. It will fetch all liabilities, then categorice them by category and sum them up.The result will be a list of dictionaries.
-def liabilitiesRawData(userId, start, end):
+def liabilitiesRawData(userId, start, end, currency):
+    currency = getExchangeRate(currency)
     liabilities = connect()
     cursor = liabilities.cursor()
 
@@ -138,8 +143,8 @@ def liabilitiesRawData(userId, start, end):
         cursor.execute("SELECT liabilityName, grossAmount, remainingAmount FROM liabilitiesCategory WHERE id = %s", (liabilityCategoryId,))
         result2 = cursor.fetchall()
         liabilityName = result2[0][0]
-        grossAmount = result2[0][1]
-        remainingAmount = result2[0][2]
+        grossAmount = result2[0][1]*currency
+        remainingAmount = result2[0][2]*currency
 
         report_data.append({
             "liabilityName": liabilityName,
@@ -156,3 +161,10 @@ def liabilitiesRawData(userId, start, end):
     cursor.close()
     return report_data, total_liabilities
 # print(liabilitiesRawData(2, '2024-05-01', '2024-5-31')) #testing the function
+
+
+#Debugging for curreny modiule
+# print(incomeRawData(1, '2024-05-01', '2024-5-31', "KES")) #testing the function
+# print(expensesRawData(1, '2024-05-01', '2024-6-30', "HUF")) #testing the function
+# print(assetsRawData(1, '2024-05-01', '2024-5-31', "HUF")) #testing the function
+# print(liabilitiesRawData(1, '2024-05-01', '2024-5-31', "KES")) #testing the function

@@ -1,5 +1,7 @@
 import datetime
 import os
+import requests
+
 def makeDir():
     folder = 'reports/AssetsReports'
     if not os.path.exists(folder):
@@ -64,3 +66,28 @@ def Convert(month):
     # print(month_names[month - 1])  #Debugging only
     monthName = month_names[month - 1]
     return monthName
+
+
+def getExchangeRate(target_currency, base_currency="HUF"):
+
+    url = f"https://open.er-api.com/v6/latest/{base_currency}" # Using the free API
+    response = requests.get(url)
+    
+    if response.status_code != 200:
+        raise Exception("Failed to fetch exchange rates from the API.")
+    
+    data = response.json()
+    
+    if data.get("result") != "success":
+        raise Exception("Failed to retrieve valid data from the API.")
+    
+    rates = data["rates"]
+    
+    if target_currency not in rates:
+        raise Exception(f"Exchange rate for {target_currency} not found.")
+    
+    return rates[target_currency]
+
+# print(getExchangeRate("KES")) # Debugging only
+
+
