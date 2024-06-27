@@ -25,7 +25,7 @@ def incomeRawData(userId, start, end, currency):
         # Fetch the amount from incomeSource table
         cursor.execute("SELECT amount FROM incomeSource WHERE id = %s", (sourceAmountId,))
         result2 = cursor.fetchone()
-        amount = result2[0]*currency if result2 else 0
+        amount = round(result2[0]*currency, 2) if result2 else 0 #concatenated the querri with conversion with rounding up
 
         # Fetch the incomeName from incomeCategory table
         cursor.execute("SELECT incomeName FROM incomeCategory WHERE id = %s", (incomeCategoryId,))
@@ -73,7 +73,7 @@ def expensesRawData(userId, start, end, currency):
             result3 = cursor.fetchone()
 
             if result3:
-                price = result3[0]*currency # Convert the price to the target currency
+                price = round(result3[0]*currency,2) # Convert the price to the target currency
                 expense_groups[expenseName] += price
 
     # Convert grouped dictionary to final report format
@@ -104,7 +104,7 @@ def assetsRawData(userId, start, end, currency):
     report_data = []
     for row in result1:
         assetCategoryId = row[0]
-        value = row[1]*currency
+        value = round(row[1]*currency, 2)
 
         cursor.execute("SELECT assetName, numberOfItems, location FROM assetsCategory WHERE id = %s", (assetCategoryId,))
         result2 = cursor.fetchall()
@@ -143,8 +143,8 @@ def liabilitiesRawData(userId, start, end, currency):
         cursor.execute("SELECT liabilityName, grossAmount, remainingAmount FROM liabilitiesCategory WHERE id = %s", (liabilityCategoryId,))
         result2 = cursor.fetchall()
         liabilityName = result2[0][0]
-        grossAmount = result2[0][1]*currency
-        remainingAmount = result2[0][2]*currency
+        grossAmount = round(result2[0][1]*currency, 2)
+        remainingAmount = round(result2[0][2]*currency, 2)
 
         report_data.append({
             "liabilityName": liabilityName,
@@ -165,6 +165,6 @@ def liabilitiesRawData(userId, start, end, currency):
 
 #Debugging for curreny modiule
 # print(incomeRawData(1, '2024-05-01', '2024-5-31', "KES")) #testing the function
-# print(expensesRawData(1, '2024-05-01', '2024-6-30', "HUF")) #testing the function
+# print(expensesRawData(1, '2024-05-01', '2024-6-30', "KES")) #testing the function
 # print(assetsRawData(1, '2024-05-01', '2024-5-31', "HUF")) #testing the function
 # print(liabilitiesRawData(1, '2024-05-01', '2024-5-31', "HUF")) #testing the function
