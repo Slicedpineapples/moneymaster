@@ -134,7 +134,7 @@ def apiGenReport(userId, start, end, currency):
     total_expenses = rawExpenses[1]
     total_assets = rawAssets[1]
     total_liabilities = rawLiabilities[1]
-    net_savings = total_income - total_expenses
+    net_savings = round((total_income - total_expenses), 2)
     net_investment = total_assets - total_liabilities
 
 
