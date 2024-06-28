@@ -66,7 +66,7 @@ body {
 }
 
 /* Buttons */
-.logout-btn, .toggle-button, #Add-Income button, #Add-Expense button, #Add-Asset button, #Add-Liability button, #reportForm button {
+.logout-btn, .toggle-button, #Add-Income button, #Add-Expense button, #Add-Asset button, #Add-Liability button, #reportForm button, #Summary button {
     font-size: 14px;
     cursor: pointer;
     border: none;
@@ -79,14 +79,22 @@ body {
 
 .logout-btn {
     background-color: red;
+    color: #fff;
+    transition: var(--transition);
 }
 
 .logout-btn:hover {
     background-color: darkred;
+    transition: var(--transition);
 }
 
-button:hover {
-    background-color: var(--button-hover-bg-color);
+#Add-Income button, #Add-Expense button, #Add-Asset button, #Add-Liability button, #reportForm button, #Summary button{
+    background-color: #007BFF;
+    color: #fff;
+}
+
+#Add-Income button:hover, #Add-Expense button:hover, #Add-Asset button:hover, #Add-Liability button:hover, #reportForm button:hover, #Summary button:hover{
+    background-color: #0056b3;
 }
 
 /* Content Section */
@@ -95,8 +103,8 @@ button:hover {
     justify-content: space-between;
     align-items: flex-start;
     height: 100%;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 30px;
+    margin-bottom: 30px;
     transition: var(--transition);
 }
 
@@ -127,6 +135,7 @@ button:hover {
     justify-content: space-between;
     align-items: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    transform: var(--transition);
     transition: var(--transition);
 }
 
@@ -146,23 +155,39 @@ button:hover {
 
 /* Specific Card Types */
 .income-card {
-    background-color: #34495e;
-    border: 1px solid #2c3e50;
+    background-color: #34495e; 
+    border: 1px solid #2c3e50; 
+    transition: var(--transition);
 }
 
 .expense-card {
-    background-color: #e74c3c;
-    border: 1px solid #c0392b;
+    background-color: #e74c3c; 
+    border: 1px solid #c0392b; 
+    transition: var(--transition);
 }
 
 .asset-card {
-    background-color: #27ae60;
-    border: 1px solid #1e8449;
+    background-color: #27ae60; 
+    border: 1px solid #1e8449; 
+    transition: var(--transition);
 }
 
 .liability-card {
-    background-color: #f39c12;
-    border: 1px solid #e67e22;
+    background-color: #f39c12; 
+    border: 1px solid #e67e22; 
+    transition: var(--transition);
+}
+
+.summary-card {
+    background-color: #582216; 
+    border: 1px solid #452419; 
+    transition: var(--transition);
+}
+
+.reports-card {
+    background-color: #4a148c; 
+    border: 1px solid #2e135d; 
+    transition: var(--transition);
 }
 
 /* Responsive Design */
@@ -170,37 +195,45 @@ button:hover {
     .content {
         flex-direction: column;
         align-items: center;
+        transition: var(--transition);
     }
     .section {
         width: 100%;
         padding: 0 10px;
+        transition: var(--transition);
     }
 }
 
 @media (max-width: 480px) {
     .header .title {
         font-size: 20px;
+        transition: var(--transition);
     }
     .header .month {
         font-size: 16px;
+        transition: var(--transition);
     }
     .logout-btn {
         font-size: 12px;
         padding: 8px 12px;
+        transition: var(--transition);
     }
     .section h2 {
         font-size: 18px;
+        transition: var(--transition);
     }
     .card .label {
         font-size: 14px;
+        transition: var(--transition);
     }
     .card .add-btn {
         font-size: 16px;
+        transition: var(--transition);
     }
 }
 
 /* Form Styles */
-#Add-Income, #Add-Expense, #Add-Asset, #Add-Liability, #Report {
+#Add-Income, #Add-Expense, #Add-Asset, #Add-Liability, #Report, #Summary {
     display: flex;
     flex-direction: column;
     align-items: left;
@@ -208,21 +241,21 @@ button:hover {
     transition: var(--transition);
 }
 
-#Add-Income h2, #Add-Expense h2, #Add-Asset h2, #Add-Liability h2, #Report h2 {
+#Add-Income h2, #Add-Expense h2, #Add-Asset h2, #Add-Liability h2, #Report h2, #Summary h2{
     font-size: 24px;
     margin-bottom: 20px;
     color: #a0a0a0;
     transition: var(--transition);
 }
 
-#Add-Income form, #Add-Expense form, #Add-Asset form, #Add-Liability form, #Report form {
+#Add-Income form, #Add-Expense form, #Add-Asset form, #Add-Liability form, #Report form, #Summary form{
     display: flex;
     flex-direction: column;
     align-items: center;
     transition: var(--transition);
 }
 
-#Add-Income .form-group, #Add-Expense .form-group, #Add-Asset .form-group, #Add-Liability .form-group, #Report .form-group {
+#Add-Income .form-group, #Add-Expense .form-group, #Add-Asset .form-group, #Add-Liability .form-group, #Report .form-group, #Summary .form-group{
     display: flex;
     align-items: center;
     margin-bottom: 10px;
@@ -230,7 +263,7 @@ button:hover {
     transition: var(--transition);
 }
 
-#Add-Income label, #Add-Expense label, #Add-Asset label, #Add-Liability label {
+#Add-Income label, #Add-Expense label, #Add-Asset label, #Add-Liability label, #Report label, #Summary label{
     font-size: 16px;
     color: var(--text-color-dark);
     margin-right: 10px;
@@ -238,7 +271,17 @@ button:hover {
     transition: var(--transition);
 }
 
-#Add-Income input, #Add-Expense input, #Add-Asset input, #Add-Liability input {
+#Report select {
+    flex: 2;
+    font-size: 16px;
+    padding: 8px;
+    border: 1px solid #555;
+    background-color: #2c2c2c; color: var(--text-color-dark);
+    border-radius: 5px;
+    transition: var(--transition);
+}
+
+#Add-Income input, #Add-Expense input, #Add-Asset input, #Add-Liability input, #Report input, #Summary input{
     flex: 2;
     padding: 8px;
     border: 1px solid #555;
@@ -249,14 +292,14 @@ button:hover {
 }
 
 /* Message Styles */
-#incomeMessage, #expenseMessage, #assetMessage, #liabilityMessage {
+#incomeMessage, #expenseMessage, #assetMessage, #liabilityMessage, #reportMessage, #summaryMessage {
     font-size: 14px;
     color: #a0a0a0;
     margin-top: 10px;
+    margin-bottom: 10px;
     display: block;
     transition: var(--transition);
 }
-
 /* Report Styles */
 #Report {
     max-width: 500px;
@@ -270,56 +313,6 @@ button:hover {
     transition: var(--transition);
 }
 
-#reportForm {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    transition: var(--transition);
-}
-
-#reportForm .form-group {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-    width: 90%;
-    transition: var(--transition);
-}
-
-#reportForm label {
-    width: 120px;
-    color: var(--text-color-dark);
-    margin-right: 10px;
-    text-align: left;
-    transition: var(--transition);
-}
-
-#reportForm select,
-#reportForm input[type="date"],
-#reportForm input[type="text"] {
-    flex-grow: 1;
-    padding: 8px;
-    border-radius: 5px;
-    border: 1px solid #555;
-    background-color: #2c2c2c;
-    color: var(--text-color-dark);
-    transition: var(--transition);
-}
-
-#reportForm button {
-    margin: 5px;
-    padding: 8px 20px;
-    border: none;
-    border-radius: 5px;
-    background-color: var(--button-bg-color);
-    color: var(--button-text-color);
-    cursor: pointer;
-    transition: var(--transition);
-}
-
-#reportForm button:hover {
-    background-color: var(--button-hover-bg-color);
-}
 
 /* Report Table Container */
 #reportTableContainer {
@@ -333,22 +326,13 @@ button:hover {
     transition: var(--transition);
 }
 
-.close-button {
-    cursor: pointer;
-    font-size: 1.5em;
-    position: relative;
-    top: 10px;
-    right: 20px;
-    transition: var(--transition);
-}
-
 /* Report Table Styles */
 #reportTable {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
     color: var(--text-color-dark);
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     transition: var(--transition);
 }
 
@@ -379,35 +363,23 @@ button:hover {
     transition: var(--transition);
 }
 
-/* Report Extension Total */
-#reportExtension {
-    display: block;
-    padding: 20px;
-    background-color: var(--bg-color-light);
-    border: 1px solid var(--border-color-light);
-    border-radius: 5px;
-    margin-top: 20px;
-    transition: var(--transition);
-}
-
 #reportExtension .total-income {
     font-size: 18px;
     font-weight: bold;
     color: var(--text-color-light);
     margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     transition: var(--transition);
 }
-
 /* Dark Mode Toggle Button */
 .toggle-button {
-    background-color: white;
-    width: 35px;
-    height: 35px;
+    background-color: grey;
+    width: 30px;
+    height: 30px;
     background-image: url(../assets/dark.svg);
+    animation: fadeIn 1s;
     background-size: cover;
     background-repeat: no-repeat;
     border: none;
     cursor: pointer;
-    transition: all 2s;
 }

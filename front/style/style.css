@@ -5,6 +5,15 @@
     --transition: var(--transition-property) var(--transition-duration) var(--transition-timing-function);
 }
 
+
+
+
+
+
+
+
+
+
 /* General Body Styles */
 body {
     font-family: Arial, sans-serif;
@@ -57,19 +66,20 @@ body {
 }
 
 /* Buttons */
-.logout-btn, .toggle-button, #Add-Income button, #Add-Expense button, #Add-Asset button, #Add-Liability button, #reportForm button {
+.logout-btn, .toggle-button, #Add-Income button, #Add-Expense button, #Add-Asset button, #Add-Liability button, #reportForm button, #Summary button {
     font-size: 14px;
     cursor: pointer;
     border: none;
     border-radius: 5px;
     padding: 10px 15px;
-    transition: background-color var(--transition), var(--transition);
+    background-color: var(--transition);
+    color: var(--button-text-color);
+    transition:  var(--transition);
 }
 
 .logout-btn {
     background-color: red;
     color: #fff;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     transition: var(--transition);
 }
 
@@ -78,12 +88,12 @@ body {
     transition: var(--transition);
 }
 
-#Add-Income button, #Add-Expense button, #Add-Asset button, #Add-Liability button, #reportForm button {
+#Add-Income button, #Add-Expense button, #Add-Asset button, #Add-Liability button, #reportForm button, #Summary button{
     background-color: #007BFF;
     color: #fff;
 }
 
-#Add-Income button:hover, #Add-Expense button:hover, #Add-Asset button:hover, #Add-Liability button:hover, #reportForm button:hover {
+#Add-Income button:hover, #Add-Expense button:hover, #Add-Asset button:hover, #Add-Liability button:hover, #reportForm button:hover, #Summary button:hover{
     background-color: #0056b3;
 }
 
@@ -93,8 +103,8 @@ body {
     justify-content: space-between;
     align-items: flex-start;
     height: 100%;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 30px;
+    margin-bottom: 30px;
     transition: var(--transition);
 }
 
@@ -125,7 +135,8 @@ body {
     justify-content: space-between;
     align-items: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: transform var(--transition), var(--transition);
+    transform: var(--transition);
+    transition: var(--transition);
 }
 
 .card .label {
@@ -164,6 +175,18 @@ body {
 .liability-card {
     background-color: #fff3e0;
     border: 1px solid #ffcc80;
+    transition: var(--transition);
+}
+
+.summary-card {
+    background-color: #ffeaf2;
+    border: 1px solid #ffcc80;
+    transition: var(--transition);
+}
+
+.reports-card {
+    background-color: rgb(246, 218, 245);
+    border: 1px solid rgb(223, 170, 254);
     transition: var(--transition);
 }
 
@@ -210,7 +233,7 @@ body {
 }
 
 /* Form Styles */
-#Add-Income, #Add-Expense, #Add-Asset, #Add-Liability, #Report {
+#Add-Income, #Add-Expense, #Add-Asset, #Add-Liability, #Report, #Summary {
     display: flex;
     flex-direction: column;
     align-items: left;
@@ -218,21 +241,21 @@ body {
     transition: var(--transition);
 }
 
-#Add-Income h2, #Add-Expense h2, #Add-Asset h2, #Add-Liability h2, #Report h2 {
+#Add-Income h2, #Add-Expense h2, #Add-Asset h2, #Add-Liability h2, #Report h2, #Summary h2{
     font-size: 24px;
     margin-bottom: 20px;
     color: #555;
     transition: var(--transition);
 }
 
-#Add-Income form, #Add-Expense form, #Add-Asset form, #Add-Liability form, #Report form {
+#Add-Income form, #Add-Expense form, #Add-Asset form, #Add-Liability form, #Report form, #Summary form{
     display: flex;
     flex-direction: column;
     align-items: center;
     transition: var(--transition);
 }
 
-#Add-Income .form-group, #Add-Expense .form-group, #Add-Asset .form-group, #Add-Liability .form-group, #Report .form-group {
+#Add-Income .form-group, #Add-Expense .form-group, #Add-Asset .form-group, #Add-Liability .form-group, #Report .form-group, #Summary .form-group{
     display: flex;
     align-items: center;
     margin-bottom: 10px;
@@ -240,7 +263,7 @@ body {
     transition: var(--transition);
 }
 
-#Add-Income label, #Add-Expense label, #Add-Asset label, #Add-Liability label {
+#Add-Income label, #Add-Expense label, #Add-Asset label, #Add-Liability label, #Report label, #Summary label{
     font-size: 16px;
     color: #333;
     margin-right: 10px;
@@ -248,7 +271,17 @@ body {
     transition: var(--transition);
 }
 
-#Add-Income input, #Add-Expense input, #Add-Asset input, #Add-Liability input {
+#Report select {
+    flex: 2;
+    font-size: 16px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    background-color: whitesmoke;
+    border-radius: 5px;
+    transition: var(--transition);
+}
+
+#Add-Income input, #Add-Expense input, #Add-Asset input, #Add-Liability input, #Report input, #Summary input{
     flex: 2;
     padding: 8px;
     border: 1px solid #ccc;
@@ -257,11 +290,14 @@ body {
 }
 
 /* Message Styles */
-#incomeMessage, #expenseMessage, #assetMessage, #liabilityMessage {
+#incomeMessage, #expenseMessage, #assetMessage, #liabilityMessage, #reportMessage, #summaryMessage {
     font-size: 14px;
     color: #555;
     margin-top: 10px;
+    margin-bottom: 10px;
+    display: block;
     transition: var(--transition);
+    
 }
 
 /* Report Styles */
@@ -277,53 +313,6 @@ body {
     transition: var(--transition);
 }
 
-#reportForm {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    transition: var(--transition);
-}
-
-#reportForm .form-group {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-    width: 90%;
-    transition: var(--transition);
-}
-
-#reportForm label {
-    width: 120px;
-    color: #333;
-    margin-right: 10px;
-    text-align: left;
-    transition: var(--transition);
-}
-
-#reportForm select,
-#reportForm input[type="date"],
-#reportForm input[type="text"] {
-    flex-grow: 1;
-    padding: 8px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    background-color: #fff;
-    color: #333;
-    transition: var(--transition);
-}
-
-/* Report Button */
-#reportForm button {
-    margin: 5px;
-    padding: 8px 20px;
-    background-color: #1e90ff;
-    color: #fff;
-    cursor: pointer;
-    border: none;
-    border-radius: 5px;
-    transition: var(--transition);
-}
 
 /* Report Table Container */
 #reportTableContainer {
@@ -342,7 +331,7 @@ body {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     transition: var(--transition);
 }
 
@@ -374,34 +363,23 @@ body {
     transition: var(--transition);
 }
 
-/* Report Extension Total Styles */
-#reportExtension {
-    display: block;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    margin-top: 20px;
-    transition: var(--transition);
-}
-
 #reportExtension .total-income {
     font-size: 18px;
     font-weight: bold;
     color: #333;
     margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     transition: var(--transition);
 }
 /* Light Mode */
 .toggle-button {
-    width: 35px;
-    height: 35px;
+    width: 30px;
+    height: 30px;
     background-image: url(../assets/light.svg);
+    animation: fadeIn 1s;
     background-size: cover;
     background-repeat: no-repeat;
     border: none;
     cursor: pointer;
     background-color: whitesmoke;
-    transition: all 2s;
 }
