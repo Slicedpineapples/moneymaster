@@ -162,7 +162,7 @@ function plusAsset() {
                         assetExtension.appendChild(child);
                     }
                     const userID = sessionStorage.getItem('sessionId');
-                    console.log(userID);
+                    // console.log(userID);
                     document.getElementById('assetForm').addEventListener('submit', async (e) => {
                         e.preventDefault();
                         const assetCategory = document.getElementById('assetCategory').value.trim();
@@ -211,7 +211,7 @@ function plusLiability() {
                         liabilityExtension.appendChild(child);
                     }
                     const userID = sessionStorage.getItem('sessionId');
-                    console.log(userID);
+                    // console.log(userID);
                     document.getElementById('liabilityForm').addEventListener('submit', async (e) => {
                         e.preventDefault();
                         const liabilityCategory = document.getElementById('liabilityCategory').value.trim();
