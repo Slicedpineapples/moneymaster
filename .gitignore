@@ -19,3 +19,6 @@ dist/
 
 # More files, based on sending emails
 .env
+
+#api logs
+logs/
