@@ -5,14 +5,22 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
     const password = document.getElementById('password').value;
 
     // Determine the base URL based on the hostname
+// Get the hostname and IP address
     const hostname = window.location.hostname;
-    let apiUrl;
-    if (hostname === 'localhost' || hostname === '127.0.0.1') {
-        apiUrl = 'http://127.0.0.1:5000/apiLogin';
+
+    // Define your local network IP address (e.g., 192.168.x.x)
+    const localNetworkIp = '192.168.x.x';
+
+    // Set the API URL based on the hostname
+    if (hostname === 'localhost' || hostname === '127.0.0.1' || hostname === localNetworkIp) {
+        // Use the localhost or local network IP for development
+        apiUrl = `http://${localNetworkIp}:5000/apiLogin`;
     } else {
-        // Change this to your server's IP address or hostname
+        // Use the server's IP address or hostname for production
         apiUrl = `http://${hostname}:5000/apiLogin`;
+        console.log(apiUrl);
     }
+
     const response = await fetch(apiUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
