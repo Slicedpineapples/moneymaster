@@ -6,9 +6,9 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
     const hostname = window.location.hostname;
     let apiUrl;
     if (hostname === 'localhost' || hostname === '127.0.0.1') {
-        apiUrl = 'http://127.0.0.1:5000/';
+        apiUrl = 'http://127.0.0.1:5000/apiLogin';
     } else {
-        apiUrl = `http://${hostname}:5000/`;
+        apiUrl = `http://${hostname}:5000/apiLogin`;
     }
     // console.log(apiUrl) //Debugging 
     
