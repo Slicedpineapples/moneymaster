@@ -102,6 +102,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 option.textContent = currency;
                 currencySelect.appendChild(option);
             }
+            // console.log('Currencies loaded:', currencies);
         })
         .catch(error => {
             console.error('Error fetching the currency data:', error);
