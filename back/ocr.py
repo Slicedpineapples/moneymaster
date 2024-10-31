@@ -10,7 +10,7 @@ def preprocessImage(imagePath):
     img = cv2.imread(imagePath, cv2.IMREAD_GRAYSCALE) # grasycale the image for better OCR accuracy
     img = cv2.resize(img, None, fx=2, fy=2, interpolation=cv2.INTER_LINEAR)  # Resize image to improve OCR accuracy
     img = cv2.GaussianBlur(img, (1, 1), 90)     # Apply GaussianBlur to reduce noise 
-    _, img = cv2.threshold(img, 150, 255, cv2.THRESH_BINARY_INV)     # Apply thresholding to binarize the image
+    # _, img = cv2.threshold(img, 150, 255, cv2.THRESH_BINARY_INV)     # Apply thresholding to binarize the image
 
     #save the preprocessed image for debugging
     cv2.imwrite(f'/home/pc52/myprojects/moneymaster/back/test/{filename}', img)
@@ -103,20 +103,14 @@ def extract_items_prices(extractedData):
 
     # Convert the dictionary to a JSON object
     receipt_json = json.dumps(receipt_data, indent=4, ensure_ascii=False)
-
-    # Print or return the JSON data
-    print(receipt_json)
     return receipt_json
 
-# merch = extract_merchant_name(extractDataFromReceipt('/home/pc52/myprojects/moneymaster/back/test/rec2.jpeg'))
+# merch = extract_merchant_name(extractDataFromReceipt('/home/pc52/myprojects/moneymaster/back/test/rec4.jpeg'))
 # print(merch)
 
-# recDate = extract_receipt_date(extractDataFromReceipt('/home/pc52/myprojects/moneymaster/back/test/WhatsApp Image 2024-10-18 at 11.29.46.jpeg'))
+# recDate = extract_receipt_date(extractDataFromReceipt('/home/pc52/myprojects/moneymaster/back/test/rec4.jpeg'))
 # print(recDate)
 
-# print(extractDataFromReceipt('/home/pc52/myprojects/moneymaster/back/test/WhatsApp Image 2024-10-18 at 11.29.46.jpeg'))
+# print(extractDataFromReceipt('/home/pc52/myprojects/moneymaster/back/test/rec4.jpeg'))
 
-# items = extract_items_and_prices(extractDataFromReceipt('/home/pc52/myprojects/moneymaster/back/test/rec1.jpeg'))
-# print(items)
-
-# print(extract_items_prices(extractDataFromReceipt('/home/pc52/myprojects/moneymaster/back/test/rec1.jpeg')))
+# print(extract_items_prices(extractDataFromReceipt('/home/pc52/myprojects/moneymaster/back/test/rec4.jpeg')))
