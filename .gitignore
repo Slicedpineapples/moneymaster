@@ -22,3 +22,4 @@ dist/
 
 #api logs
 logs/
+test/
