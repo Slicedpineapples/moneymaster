@@ -113,4 +113,4 @@ def extract_items_prices(extractedData):
 
 # print(extractDataFromReceipt('/home/pc52/myprojects/moneymaster/back/test/rec4.jpeg'))
 
-# print(extract_items_prices(extractDataFromReceipt('/home/pc52/myprojects/moneymaster/back/test/rec4.jpeg')))
+print(extract_items_prices(extractDataFromReceipt('/home/pc52/myprojects/moneymaster/back/test/rec4.jpeg')))
