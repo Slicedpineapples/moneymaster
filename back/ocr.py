@@ -79,13 +79,11 @@ def resize(imagePath):
     if image is None:
         raise FileNotFoundError(f"Image not found at {imagePath}")
 
+    # Convert the image to grayscale
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-
-    # Blur the image to reduce noise
-    blurred = cv2.GaussianBlur(gray, (5, 5), 0)
-
+    
     # Edge detection to find contours
-    edges = cv2.Canny(blurred, 50, 150)
+    edges = cv2.Canny(gray, 50, 150)
 
     # Find contours in the edged image
     contours, _ = cv2.findContours(edges.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
@@ -153,8 +151,10 @@ def resize(imagePath):
 
     return resized
 
+# Example usage
+binarize('/home/pc52/myprojects/moneymaster/back/test/rec4.jpeg')
 # inverted = monoChrome('/home/pc52/myprojects/moneymaster/back/test/rec4.jpeg')
 # deskew('/home/pc52/myprojects/moneymaster/back/test/rec4.jpeg')
 # rotated = deskew('/home/pc52/myprojects/moneymaster/back/test/rec4.jpeg')
 # resize(rotated)
-resize('/home/pc52/myprojects/moneymaster/back/test/rec4.jpeg')
+binarize('/home/pc52/myprojects/moneymaster/back/test/rec4.jpeg')
