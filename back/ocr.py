@@ -1,116 +1,160 @@
 import cv2
+import numpy as np
 import pytesseract
 from pytesseract import Output
 import re
 import json
+# numpy
+import os
 
-def preprocessImage(imagePath):
+global savePathGlobal
+savePathGlobal = '/home/pc52/myprojects/moneymaster/back/test'
 
-    filename = 'preprocessed'+imagePath.split('/')[-1]
-    img = cv2.imread(imagePath, cv2.IMREAD_GRAYSCALE) # grasycale the image for better OCR accuracy
-    img = cv2.resize(img, None, fx=2, fy=2, interpolation=cv2.INTER_LINEAR)  # Resize image to improve OCR accuracy
-    img = cv2.GaussianBlur(img, (1, 1), 90)     # Apply GaussianBlur to reduce noise 
-    # _, img = cv2.threshold(img, 150, 255, cv2.THRESH_BINARY_INV)     # Apply thresholding to binarize the image
-
-    #save the preprocessed image for debugging
-    cv2.imwrite(f'/home/pc52/myprojects/moneymaster/back/test/{filename}', img)
-    return img
-
-def extractDataFromReceipt(imagePath):
-    # Preprocess image
-    img = preprocessImage(imagePath)
+def monoChrome(imagePath):
+    # Ensure the save directory exists
+    savePath = savePathGlobal
+    os.makedirs(savePath, exist_ok=True)
     
-    # OCR: Extract text using Hungarian language model
-    customConfig = r'--oem 3 --psm 6 -l hun'
-    rawText = pytesseract.image_to_string(img, config=customConfig)
+    # Load the image in grayscale
+    gray = cv2.imread(imagePath, cv2.IMREAD_GRAYSCALE)
+    if gray is None:
+        raise ValueError(f"Unable to load the image from path: {imagePath}")
     
-    # Extract structured data (items, price, date)
-    # print("Raw OCR Output:\n", rawText)
+    # Apply adaptive thresholding for dynamic binarization
+    gray = cv2.adaptiveThreshold(
+        gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, 
+        cv2.THRESH_BINARY_INV, 11, 11
+    )
+    # Invert the binary image
+    inverted = cv2.bitwise_not(gray)
 
-    # Split the text into lines
-    lines = rawText.split('\n')
-    return rawText
+    # Save the processed image
+    filename = f'gray_{os.path.basename(imagePath)}'
+    savePath = os.path.join(savePath, filename)
+    cv2.imwrite(savePath, inverted)
+    
+    return inverted
 
-# Extract the merchant name
-def extract_merchant_name(text):
-    # Assuming merchant name is usually the first line in the receipt accoding to ISO 3166-1 alpha-2
-    lines = text.splitlines()
-    for line in lines:
-        if re.search(r'\bKFT\b', line, re.IGNORECASE):
-            return line.strip()
-    return lines[0] if lines else None
+def deskew(imagePath):
+    savePath = savePathGlobal
+    os.makedirs(savePath, exist_ok=True)
 
-# Extract receipt Date
-def extract_receipt_date(text):
-    # Look for the total cost line which usually contains "ÖSSZESEN"
-    match = re.search(r'(\d{4}\.\d{2}\.\d{2})', text, re.IGNORECASE)
-    if match:
-        return match.group(1)
-    return None
+    # Load the image in grayscale mode
+    inverted = cv2.imread(imagePath, cv2.IMREAD_GRAYSCALE)
+    if inverted is None:
+        raise FileNotFoundError(f"Image not found at {imagePath}")
+
+    # Find all non-zero pixel coordinates
+    coords = np.column_stack(np.where(inverted > 0))
+    angle = cv2.minAreaRect(coords)[-1]
+
+    # Correct the angle
+    if angle < -45:
+        angle = -(90 + angle)
+    else:
+        angle = -angle
+
+    # Get image dimensions
+    (h, w) = inverted.shape[:2]
+    center = (w // 2, h // 2)
+
+    # Compute the rotation matrix and apply it
+    M = cv2.getRotationMatrix2D(center, angle, 1.0)
+    rotated = cv2.warpAffine(inverted, M, (w, h), flags=cv2.INTER_CUBIC, borderMode=cv2.BORDER_REPLICATE)
+
+    # Save the processed image
+    filename = f'rotated_{os.path.basename(imagePath)}'
+    outputPath = os.path.join(savePath, filename)
+    cv2.imwrite(outputPath, rotated)
+
+    return rotated
 
 
-# Extract items and prices
-def extract_items_prices(extractedData):
-    # Split the extracted data into lines
-    lines = extractedData.split('\n')
+def resize(imagePath):
+    savePath = savePathGlobal
+    os.makedirs(savePath, exist_ok=True)
 
-    # Initialize the dictionary to store items and prices
-    items_dict = {}
+    # Load the image
+    image = cv2.imread(imagePath)
+    if image is None:
+        raise FileNotFoundError(f"Image not found at {imagePath}")
 
-    # Regular expression to capture prices (whole numbers before the decimal point)
-    price_pattern = r'(\d{1,3}(?:\.\d{3})?|\d+)\s?[€]?[Ft]?'  # Matches prices like 199, 499, etc.
+    # Convert the image to grayscale
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    
+    # Edge detection to find contours
+    edges = cv2.Canny(gray, 50, 150)
 
-    # Loop through the lines to extract items and avoid unnecessary text
-    inside_item_section = False
+    # Find contours in the edged image
+    contours, _ = cv2.findContours(edges.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
-    for i in range(len(lines)):
-        line = lines[i].strip()
+    # Sort contours by area and keep the largest one (assumes receipt is the largest object)
+    contours = sorted(contours, key=cv2.contourArea, reverse=True)
 
-        # Check for the start of the items section (after NYUGTA)
-        if 'NYUGTA' in line:
-            inside_item_section = True
-            continue
+    receipt_contour = None
+    for contour in contours:
+        # Approximate the contour to a polygon
+        epsilon = 0.02 * cv2.arcLength(contour, True)
+        approx = cv2.approxPolyDP(contour, epsilon, True)
 
-        # Check for the end of the items section (before ÖSSZESEN)
-        if 'ÖSSZESEN' in line:
-            inside_item_section = False
-            continue
+        # If the polygon has 4 points, it might be the receipt
+        if len(approx) == 4:
+            receipt_contour = approx
+            break
 
-        # Skip lines that contain "RÉSZÖSSZEG"
-        if 'RÉSZÖSSZEG' in line:
-            continue
+    if receipt_contour is None:
+        raise ValueError("Could not find a rectangular receipt in the image.")
 
-        # Extract items and their prices within the items section
-        if inside_item_section and line:
-            # Try to find a price using the regular expression
-            price_match = re.search(price_pattern, line)
-            
-            if price_match:
-                # Extract the price (only the whole number part)
-                price = price_match.group(1).replace(',', '').replace('.', '')
+    # Get a consistent order of points and prepare for a perspective transform
+    rect = np.array(receipt_contour[:, 0], dtype="float32")
+    rect = sorted(rect, key=lambda x: x[1])  # Sort by vertical (y-coordinate)
 
-                # Extract the item name (everything before the price)
-                item_name = line[:price_match.start()].strip()
+    # Top-left, top-right, bottom-right, bottom-left
+    if rect[0][0] < rect[1][0]:  # Compare x-coordinates
+        top_left, top_right = rect[0], rect[1]
+    else:
+        top_left, top_right = rect[1], rect[0]
 
-                # Store item and price in dictionary
-                items_dict[item_name] = int(price)
+    if rect[2][0] < rect[3][0]:  # Compare x-coordinates
+        bottom_left, bottom_right = rect[2], rect[3]
+    else:
+        bottom_left, bottom_right = rect[3], rect[2]
 
-    # Organize the data into a dictionary
-    receipt_data = {
- 
-        "items": items_dict
-    }
+    # Define the destination points for the perspective transform
+    width = max(
+        int(np.linalg.norm(top_right - top_left)),
+        int(np.linalg.norm(bottom_right - bottom_left))
+    )
+    height = max(
+        int(np.linalg.norm(top_left - bottom_left)),
+        int(np.linalg.norm(top_right - bottom_right))
+    )
+    dst = np.array([
+        [0, 0],
+        [width - 1, 0],
+        [width - 1, height - 1],
+        [0, height - 1]
+    ], dtype="float32")
 
-    # Convert the dictionary to a JSON object
-    receipt_json = json.dumps(receipt_data, indent=4, ensure_ascii=False)
-    return receipt_json
+    # Perspective transform to extract the receipt
+    M = cv2.getPerspectiveTransform(np.array([top_left, top_right, bottom_right, bottom_left]), dst)
+    warped = cv2.warpPerspective(image, M, (width, height))
 
-# merch = extract_merchant_name(extractDataFromReceipt('/home/pc52/myprojects/moneymaster/back/test/rec4.jpeg'))
-# print(merch)
+    # Resize the extracted receipt (optional)
+    resized = cv2.resize(warped, None, fx=2, fy=2, interpolation=cv2.INTER_LINEAR)
 
-# recDate = extract_receipt_date(extractDataFromReceipt('/home/pc52/myprojects/moneymaster/back/test/rec4.jpeg'))
-# print(recDate)
+    # Save the processed images
+    cropped_filename = os.path.join(savePath, 'cropped_receipt.jpeg')
+    resized_filename = os.path.join(savePath, 'resized_receipt.jpeg')
+    cv2.imwrite(cropped_filename, warped)
+    cv2.imwrite(resized_filename, resized)
 
-# print(extractDataFromReceipt('/home/pc52/myprojects/moneymaster/back/test/rec4.jpeg'))
+    return resized
 
-print(extract_items_prices(extractDataFromReceipt('/home/pc52/myprojects/moneymaster/back/test/rec4.jpeg')))
+# Example usage
+binarize('/home/pc52/myprojects/moneymaster/back/test/rec4.jpeg')
+# inverted = monoChrome('/home/pc52/myprojects/moneymaster/back/test/rec4.jpeg')
+# deskew('/home/pc52/myprojects/moneymaster/back/test/rec4.jpeg')
+# rotated = deskew('/home/pc52/myprojects/moneymaster/back/test/rec4.jpeg')
+# resize(rotated)
+binarize('/home/pc52/myprojects/moneymaster/back/test/rec4.jpeg')
