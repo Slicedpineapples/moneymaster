@@ -3,14 +3,15 @@ import pytesseract
 from pytesseract import Output
 import re
 import json
+# numpy
 
 def preprocessImage(imagePath):
 
     filename = 'preprocessed'+imagePath.split('/')[-1]
     img = cv2.imread(imagePath, cv2.IMREAD_GRAYSCALE) # grasycale the image for better OCR accuracy
     img = cv2.resize(img, None, fx=2, fy=2, interpolation=cv2.INTER_LINEAR)  # Resize image to improve OCR accuracy
-    img = cv2.GaussianBlur(img, (1, 1), 90)     # Apply GaussianBlur to reduce noise 
-    # _, img = cv2.threshold(img, 150, 255, cv2.THRESH_BINARY_INV)     # Apply thresholding to binarize the image
+    img = cv2.GaussianBlur(img, (5, 5), 0)     # Apply GaussianBlur to reduce noise 
+    _, img = cv2.threshold(img, 150, 255, cv2.THRESH_BINARY_INV)     # Apply thresholding to binarize the image
 
     #save the preprocessed image for debugging
     cv2.imwrite(f'/home/pc52/myprojects/moneymaster/back/test/{filename}', img)
@@ -111,6 +112,6 @@ def extract_items_prices(extractedData):
 # recDate = extract_receipt_date(extractDataFromReceipt('/home/pc52/myprojects/moneymaster/back/test/rec4.jpeg'))
 # print(recDate)
 
-# print(extractDataFromReceipt('/home/pc52/myprojects/moneymaster/back/test/rec4.jpeg'))
+# print(extractDataFromReceipt('/home/pc52/myprojects/moneymaster/back/test/rec3.jpeg'))
 
-print(extract_items_prices(extractDataFromReceipt('/home/pc52/myprojects/moneymaster/back/test/rec4.jpeg')))
+# print(extract_items_prices(extractDataFromReceipt('/home/pc52/myprojects/moneymaster/back/test/rec3.jpeg')))
