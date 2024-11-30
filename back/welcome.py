@@ -84,3 +84,4 @@ def login(username, password):
             connection.close()
 
 # print(login("helix", "helix")) #Debugging only
+# print(signUp("webdev", "webde@mail.com", "webdev", "1234567890")) #Debugging only
