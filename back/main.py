@@ -9,11 +9,6 @@ from reports import incomeReport, expensesReport, assetsReport, liabilitiesRepor
 
 import os
 
-# Function to create the 'reports' directory if it doesn't exist
-def create_reports_directory():
-    if not os.path.exists('reports'):
-        os.makedirs('reports')
-
 def mainApp():
     global userId
     global userName
@@ -89,8 +84,8 @@ def mainApp():
             print("Invalid choice. Try again.")
             continue
 
-# try:
-#     mainApp()
-# except Exception as e:
-#     print("Something went wrong:", e)
-#     mainApp()
+try:
+    mainApp()
+except Exception as e:
+    print("Something went wrong:", e)
+    mainApp()

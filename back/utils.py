@@ -1,8 +1,13 @@
 import datetime
 import os
 import requests
+from server import connect
+from mysql.connector import Error
 
 def makeDir():
+    folder = 'reports'
+    if not os.path.exists(folder):
+        os.makedirs(folder)
     folder = 'reports/AssetsReports'
     if not os.path.exists(folder):
         os.makedirs(folder)
@@ -70,7 +75,6 @@ def Convert(month):
     monthName = month_names[month - 1]
     return monthName
 
-
 def getExchangeRate(target_currency, base_currency="HUF"):
 
     url = f"https://open.er-api.com/v6/latest/{base_currency}" # Using the free API
@@ -91,6 +95,39 @@ def getExchangeRate(target_currency, base_currency="HUF"):
     
     return rates[target_currency]
 
-# print(getExchangeRate("KES")) # Debugging only
+def seed():
+    # Check if the database exists. If not, seed it with a schema.
+    try:
+        connection = connect() # using the first function to connect to the database
+        cursor = connection.cursor()
+        # Check if the database exists
+        database_name = os.getenv("DB_NAME")
+        cursor.execute(f"SHOW DATABASES LIKE '{database_name}'")
+        result = cursor.fetchone()
 
+        if result:
+            print(f"Database '{database_name}' already exists.")
+        else:
+            print(f"Database '{database_name}' does not exist. Trying to create and seed the database...")
+            # Create the database
+            cursor.execute(f"CREATE DATABASE {database_name}")
+            connection.database = database_name  # Switch to the new database
+
+            # Seed the database with the schema
+            schema_path = "moneymaster.sql"  # Update this path if necessary
+            with open(schema_path, "r") as schema_file:
+                schema_sql = schema_file.read()
+                for statement in schema_sql.split(";"):  # Split on ';' for individual statements
+                    if statement.strip():  # Skip empty statements
+                        cursor.execute(statement)
+
+            print(f"Database '{database_name}' has been created and seeded successfully.")
+
+        cursor.close()
+        connection.close()
+
+    except Error as err:
+        print(f"Something went wrong: {err}")
+
+# seed() # Debugging only
 
