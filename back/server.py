@@ -5,7 +5,7 @@ import os
 load_dotenv()
 
 def connect():
-    """Establishes a connection to the database."""
+    # Establishes a connection to the database.
     try:
         connection = mysql.connector.connect(
         host = os.getenv("DB_HOST"),
@@ -21,6 +21,3 @@ def connect():
         print(f"Something went wrong.[Error at server.py]: {err}")
 
     return None  # Explicitly return None if the connection fails
-
-
-connect()

@@ -24,3 +24,7 @@ dist/
 #api logs
 logs/
 test/
+
+
+# Database schema
+.sql
