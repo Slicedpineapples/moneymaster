@@ -3,7 +3,7 @@
 reports/
 __pycache__/
 api.py
-server.py
+#server.py
 myenv/
 nohup.out
 moneymaster.sql
