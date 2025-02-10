@@ -1,7 +1,7 @@
 import datetime
 import os
 import requests
-from server import connect
+from server import connect4seed
 from mysql.connector import Error
 
 def makeDir():
@@ -98,7 +98,7 @@ def getExchangeRate(target_currency, base_currency="HUF"):
 def seed():
     # Check if the database exists. If not, seed it with a schema.
     try:
-        connection = connect() # using the first function to connect to the database
+        connection = connect4seed # using the first function to connect to the database
         cursor = connection.cursor()
         # Check if the database exists
         database_name = os.getenv("DB_NAME")
